@@ -39,12 +39,14 @@ public class HomeController {
 	@RequestMapping("/test1")
 	public String test1() {
 		logger.info("Welcome to Test1 Function");
+		
 		return "test1";
 	}
 	
 	@RequestMapping("/test2")
 	public String test2() {
 		logger.info("Test1 Page --> Test2 Page");
+		
 		return "test2";
 	}
 	
