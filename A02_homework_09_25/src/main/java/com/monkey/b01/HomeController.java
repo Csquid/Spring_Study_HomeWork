@@ -33,7 +33,7 @@ public class HomeController {
 		return "index";
 	}
 	
-	@RequestMapping(value = "sub1_Tab", method = RequestMethod.POST)
+	@RequestMapping(value = "sub1_Tab", method = RequestMethod.GET)
 	public String sub1(Model model) {
 		logger.info("sub1");
 		model.addAttribute("page", "sub1_Tab");
@@ -42,7 +42,7 @@ public class HomeController {
 		return "index";
 	}
 	
-	@RequestMapping(value = "sub2_Tab", method = RequestMethod.POST)
+	@RequestMapping(value = "sub2_Tab", method = RequestMethod.GET)
 	public String sub2(Model model) {
 		logger.info("sub2");
 		model.addAttribute("page", "sub2_Tab");
@@ -50,7 +50,7 @@ public class HomeController {
 		return "index";
 	}
 	
-	@RequestMapping(value = "sub3_Tab", method = RequestMethod.POST)
+	@RequestMapping(value = "sub3_Tab", method = RequestMethod.GET)
 	public String sub3(Model model) {
 		logger.info("sub3");
 		model.addAttribute("page", "sub3_Tab");
