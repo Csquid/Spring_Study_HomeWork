@@ -8,6 +8,6 @@
 </head>
 <body>
 	<hr>
-	<h1>This is Footer Area</h1>
+	<h1 id="colorRed">This is Footer Area</h1>
 </body>
 </html>

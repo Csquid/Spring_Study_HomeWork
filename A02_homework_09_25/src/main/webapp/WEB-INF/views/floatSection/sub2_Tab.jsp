@@ -6,7 +6,7 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
-<body>
-	<h1 id="su">Sub2 Page</h1>
-</body>
+	<div class="content">
+		<h1>Sub2 Page</h1>	
+	</div>
 </html>

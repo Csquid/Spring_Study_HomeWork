@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1 id="su">Sub1 Page</h1>
+	<div class="content">
+		<h1>Sub1 Page</h1>	
+	</div>
 </body>
 </html>

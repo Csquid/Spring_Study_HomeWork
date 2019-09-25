@@ -3,24 +3,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style type="text/css">
-	#su {
+	body {
+		background-image: url('resources/images/simple.gif');
+	}
+	#colorRed {
+		background-color: #FF0000;
+	}
+	button {
+		width: 300px;
+		height: 100px;
+		margin-top: 15px;
+		margin-left: 10px;
+		margin-right: 10px;
+		font-size: 45px;
+	}
+	.content {
 		background-color: #D9E5FF;
+		height: 600px;
+		text-align: center;
 	}
 </style>
 </head>
 <body>	
-	<button type="button" onclick="location.href='sub1_Tab'">
-		sub1
-	</button>
-	<button type="button" onclick="location.href='sub2_Tab'">
-		sub2
-	</button>
-	<button type="button" onclick="location.href='sub3_Tab'">
-		sub3
-	</button>
+	<div class="header">
+	<div class=row>
+		<button type="button" class="btn-primary col" onclick="location.href='sub1_Tab'">
+			sub1
+		</button>
+		<button type="button" class="btn-primary col" onclick="location.href='sub2_Tab'">
+			sub2
+		</button>
+		<button type="button" class="btn-primary col" onclick="location.href='sub3_Tab'">
+			sub3
+		</button>
+	</div>
+	</div>
 	<hr>
 </body>
 </html>
