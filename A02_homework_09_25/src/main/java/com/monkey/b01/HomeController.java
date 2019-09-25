@@ -33,27 +33,28 @@ public class HomeController {
 		return "index";
 	}
 	
-	@RequestMapping("floatSection/sub1_Tab")
+	@RequestMapping(value = "sub1_Tab", method = RequestMethod.POST)
 	public String sub1(Model model) {
 		logger.info("sub1");
 		model.addAttribute("page", "sub1_Tab");
 		
-		return "redirect:/";
+//		return "redirect:/";
+		return "index";
 	}
 	
-	@RequestMapping("floatSection/sub2_Tab")
+	@RequestMapping(value = "sub2_Tab", method = RequestMethod.POST)
 	public String sub2(Model model) {
 		logger.info("sub2");
 		model.addAttribute("page", "sub2_Tab");
 		
-		return "redirect:/";
+		return "index";
 	}
 	
-	@RequestMapping("floatSection/sub3_Tab")
+	@RequestMapping(value = "sub3_Tab", method = RequestMethod.POST)
 	public String sub3(Model model) {
 		logger.info("sub3");
 		model.addAttribute("page", "sub3_Tab");
 		
-		return "redirect:/";
+		return "index";
 	}
 }

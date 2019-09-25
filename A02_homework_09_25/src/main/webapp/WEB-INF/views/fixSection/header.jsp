@@ -12,15 +12,17 @@
 </style>
 </head>
 <body>
-	<button type="button" onclick="location.href='floatSection/sub1_Tab'">
-		sub1
-	</button>
-	<button type="button" onclick="location.href='floatSection/sub2_Tab'">
-		sub2
-	</button>
-	<button type="button" onclick="location.href='floatSection/sub3_Tab'">
-		sub3
-	</button>
+	<form action="sub1_Tab" method="POST">
+		<input type="submit" value="sub1">
+	</form>
+	
+	<form action="sub2_Tab" method="POST">
+		<input type="submit" value="sub2">
+	</form>
+	
+	<form action="sub3_Tab" method="POST">
+		<input type="submit" value="sub3">
+	</form>
 	<hr>
 </body>
 </html>
