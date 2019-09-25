@@ -5,6 +5,11 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<style type="text/css">
+	#su {
+		background-color: #D9E5FF;
+	}
+</style>
 </head>
 <body>
 	<button type="button" onclick="location.href='floatSection/sub1_Tab'">

@@ -5,11 +5,6 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<style type="text/css">
-	#su {
-		background-color: #D9E5FF;
-	}
-</style>
 </head>
 <body>
 	<h1 id="su">Sub1 Page</h1>
