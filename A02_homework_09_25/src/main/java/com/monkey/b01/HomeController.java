@@ -33,14 +33,45 @@ public class HomeController {
 		return "index";
 	}
 	
+	/*
+	@RequestMapping(value = "floatSection/sub1_Tab", method = RequestMethod.GET)
+	public String sub1(Model model) {
+		logger.info("sub1");
+		model.addAttribute("page", "sub1_Tab");
+		
+		//return "redirect:/";
+		return "floatSection/sub1_Tab";
+	}
+	
+	@RequestMapping(value = "floatSection/sub2_Tab", method = RequestMethod.GET)
+	public String sub2(Model model) {
+		logger.info("sub2");
+		model.addAttribute("page", "sub2_Tab");
+		
+		//return "redirect:/";
+		return "index";
+	}
+	
+	@RequestMapping(value = "floatSection/sub3_Tab", method = RequestMethod.GET)
+	public String sub3(Model model) {
+		logger.info("sub1");
+		model.addAttribute("page", "sub3_Tab");
+		
+		//return "redirect:/";
+		return "floatSection/sub3_Tab";
+	}
+	*/
+
+	
 	@RequestMapping(value = "sub1_Tab", method = RequestMethod.GET)
 	public String sub1(Model model) {
 		logger.info("sub1");
 		model.addAttribute("page", "sub1_Tab");
 		
-//		return "redirect:/";
+		//return "redirect:/";
 		return "index";
 	}
+	
 	
 	@RequestMapping(value = "sub2_Tab", method = RequestMethod.GET)
 	public String sub2(Model model) {
@@ -57,4 +88,6 @@ public class HomeController {
 		
 		return "index";
 	}
+	
+	
 }
