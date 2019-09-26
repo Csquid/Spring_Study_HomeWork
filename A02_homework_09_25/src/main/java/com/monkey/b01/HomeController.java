@@ -23,6 +23,7 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpServletRequest request) {
 		String nPage = request.getParameter("page");
@@ -33,6 +34,7 @@ public class HomeController {
 		
 		return "index";
 	}
+	
 	
 	/*
 	@RequestMapping(value = "floatSection/sub1_Tab", method = RequestMethod.GET)
@@ -69,7 +71,6 @@ public class HomeController {
 		logger.info("sub1");
 		model.addAttribute("page", "sub1_Tab");
 		
-		//return "redirect:/";
 		return "index";
 	}
 	
