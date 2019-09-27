@@ -45,6 +45,7 @@
 				    data-toggle="modal" data-target="#myModal">
 				Login
 			</button>
+			
 		</nav>
 
 		
