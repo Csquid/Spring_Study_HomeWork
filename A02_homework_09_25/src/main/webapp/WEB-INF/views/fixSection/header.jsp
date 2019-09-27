@@ -26,23 +26,24 @@
 				<ul class="navbar-nav">
 					<li class="nav-item" id="sub1_Tab">
 						<a class="nav-link liText" href="sub1_Tab" onclick="">
-							Home
+							Sub1 Page
 						</a>
 					</li>
 					<li class="nav-item" id="sub2_Tab">
 						<a class="nav-link liText" href="sub2_Tab" onclick="">
-							Features
+							Sub2 Page
 						</a>
 					</li>
 					<li class="nav-item" id="sub3_Tab">
 						<a class="nav-link liText " href="sub3_Tab" onclick="">
-							Pricing
+							Sub3 Page
 						</a>
 					</li>	
 				</ul>
 			</div>
 			<button type="button" class="btn btn-secondary btn-lg" 
-				    data-toggle="modal" data-target="#myModal">
+				    data-toggle="modal" data-target="#modal_login"
+				    onclick="clickModalLoginButton()">
 				Login
 			</button>
 			
