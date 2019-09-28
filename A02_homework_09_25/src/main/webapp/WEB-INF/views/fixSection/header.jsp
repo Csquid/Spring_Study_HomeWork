@@ -43,7 +43,7 @@
 			</div>
 			<button type="button" class="btn btn-secondary btn-lg" 
 				    data-toggle="modal" data-target="#modal_login"
-				    onclick="clickModalLoginButton()">
+				    onclick="">
 				Login
 			</button>
 			
