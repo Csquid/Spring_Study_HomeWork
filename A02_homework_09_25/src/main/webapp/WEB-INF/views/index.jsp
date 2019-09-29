@@ -14,3 +14,4 @@
 </c:if>
 
 <%@ include file="fixSection/footer.jsp"%>
+<%@ include file="fixSection/modal.jsp"%>
