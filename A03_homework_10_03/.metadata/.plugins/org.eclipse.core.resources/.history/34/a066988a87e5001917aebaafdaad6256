@@ -1,0 +1,13 @@
+package com.movie.watch.mapper;
+
+import java.util.ArrayList;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.movie.watch.vo.MemberVO;
+
+@Mapper
+public interface MemberMapper {
+	public ArrayList<Map<String, String>> test(MemberVO vo);
+}

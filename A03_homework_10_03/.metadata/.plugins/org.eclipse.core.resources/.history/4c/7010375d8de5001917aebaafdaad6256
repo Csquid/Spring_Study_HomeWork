@@ -1,0 +1,49 @@
+package com.movie.watch.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.movie.watch.service.MemberService;
+import com.movie.watch.vo.MemberVO;
+
+import lombok.AllArgsConstructor;
+import net.sf.json.JSONObject;
+import org.json.simple.JSONArray;
+
+@Controller
+@AllArgsConstructor
+@RequestMapping(value = "/member/**")
+public class MemberLoginController {
+	private static final Logger logger = LoggerFactory.getLogger(MemberLoginController.class);
+
+	private MemberService service;
+	
+	@ResponseBody
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String index(Model model, @RequestBody MemberVO vo, HttpServletRequest request) {
+		logger.info("회원가입요청");
+		String resultJsonObject = null;
+		MemberVO object = service.memberLoginService(vo);
+		JSONObject jsonObject = new JSONObject();
+		
+		if(object != null) {
+//			resultJsonObject =  JSONArray.fromObject(service.memberLoginService(vo)).toString();
+			
+			jsonObject.put("name", object.getName());
+			jsonObject.put("signal", "success");
+			return jsonObject.toString();
+		} else {
+			jsonObject.put("signal", "fail");
+			return jsonObject.toString();
+		}
+	}
+
+}

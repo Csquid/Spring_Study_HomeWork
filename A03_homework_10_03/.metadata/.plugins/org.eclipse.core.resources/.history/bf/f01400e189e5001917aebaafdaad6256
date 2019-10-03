@@ -1,0 +1,5 @@
+package com.movie.watch.service;
+
+public class MemberService {
+
+}

@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
+	
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  
+  
+<style type="text/css">
+span {
+	color: "red";
+}
+</style>
+</head>
+<body>
+	<div>
+		<input type="text" class="id"> <input type="password"
+			class="pw">
+		<button id="submit">Login</button>
+	</div>
+
+	<div>
+		등급은: <span id="result"> </span>입니다.
+	</div>
+
+	<script>
+		$(function() {
+			$("#submit").click(function() {
+				var data = JSON.stringify({
+					id : $('.id').val(),
+					pw : $('.pw').val()
+				});
+
+				$.ajax({
+					type : "POST",
+					url : "/member/login",
+					data: data,
+					dataType: "json",
+					contentType: "application/json",
+					success : function(data) {
+						console.log(data);
+					}
+				})
+			})
+		})
+	</script>
+</body>
+</html>
