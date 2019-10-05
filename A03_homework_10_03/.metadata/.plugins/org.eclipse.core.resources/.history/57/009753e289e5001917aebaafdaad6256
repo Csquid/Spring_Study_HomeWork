@@ -1,7 +1,0 @@
-package com.movie.watch.service;
-
-public class MemberService {
-	public MemberVO memberLoginService(MemberVO vo) {
-		
-	}
-}

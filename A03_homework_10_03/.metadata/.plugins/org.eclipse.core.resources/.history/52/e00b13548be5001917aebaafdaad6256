@@ -1,9 +1,0 @@
-package com.movie.watch.service;
-
-import com.movie.watch.vo.MemberVO;
-
-public class MemberService {
-	public MemberVO memberLoginService(MemberVO vo) {
-		
-	}
-}

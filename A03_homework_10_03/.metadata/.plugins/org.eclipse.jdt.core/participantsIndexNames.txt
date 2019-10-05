@@ -1,9 +1,0 @@
-INDEX VERSION 1.131
-D:\Programming\Spring\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2138402699.index
-\timeSleep\src\main\java
-D:\Programming\Spring\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1980195331.index
-\timeSleep\src\main\java
-D:\Programming\Spring\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2745614445.index
-\timeSleep\src\main\java
-D:\Programming\Spring\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1703830904.index
-\timeSleep\src\main\java
