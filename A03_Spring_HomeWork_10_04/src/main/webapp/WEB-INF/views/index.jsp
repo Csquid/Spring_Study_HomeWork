@@ -19,5 +19,5 @@
 
 <%@ include file="fixSection/modal.jsp"%>
 <%@ include file="fixSection/footer.jsp"%>
-<%@ include file="common/jsManage.jsp"%>
 <%@ include file="common/sessionManage.jsp"%>
+<%@ include file="common/jsManage.jsp"%>

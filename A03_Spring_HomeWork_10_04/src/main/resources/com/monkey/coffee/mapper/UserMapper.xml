@@ -12,4 +12,13 @@
 		id = #{id}
 		AND pw = #{pw}
 	</select>
+	<insert id="insertUser" parameterType="UserVO">
+		INSERT INTO MEMBER VALUES(
+			#{id}, 
+			#{pw}, 
+			#{name},
+			#{gender},
+			#{address}
+		)
+	</insert>
 </mapper>

@@ -1,5 +1,5 @@
 package com.monkey.coffee.controller;
-
+//https://addio3305.tistory.com/91
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -64,7 +64,7 @@ public class UserLoginController {
 	}
 	
 	@GetMapping(value = "/logout")
-	public String logoutMember(Model model, HttpServletRequest request) {
+	public String logoutUser(Model model, HttpServletRequest request) {
 		logger.info("########################  @GetMapping value /logout ########################");
 		HttpSession session = request.getSession();
 		
@@ -72,5 +72,30 @@ public class UserLoginController {
 		session.invalidate();
 		
 		return "/index";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String registerUser(Model model, @RequestBody UserVO vo, HttpServletRequest request) {
+		logger.info("UserrLoginController /user/register");
+		
+		HttpSession session = request.getSession();
+		
+		int checkResult = service.insertUser(vo);
+		
+		JSONObject jsonObject = new JSONObject();
+		
+		logger.info("checkResult: " + checkResult);
+		//회원가입이 되었을때
+		if(checkResult > 0) {
+			session.setAttribute("userInfo", vo);
+			jsonObject.put("signal", "success");
+			jsonObject.put("userInfo", session.getAttribute("userInfo"));
+			return jsonObject.toString();
+		} else {
+			jsonObject.put("signal", "fail");
+			return jsonObject.toString();
+		}
+		
 	}
 }

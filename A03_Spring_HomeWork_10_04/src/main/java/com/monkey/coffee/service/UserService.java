@@ -19,4 +19,7 @@ public class UserService {
 	public UserVO userLoginService(UserVO vo) {
 		return mapper.userLogin(vo);
 	}
+	public int insertUser(UserVO vo) {
+		return mapper.insertUser(vo);
+	}
 }

@@ -19,28 +19,30 @@
 						</button>
 					</div>
 
-					<div class="modal-body monkey-login-body">
-						<!-- Input: ID -->
+					<!-- Modal Body :: CSS_monkey-modal-body -->
+					<div class="modal-body monkey-modal-body">
+						<!-- Input: Login_ID -->
 						<div class="input-group mb-7 monkey-input">
-							<input type="text" class="form-control" id="monkey-id" placeholder="ID"
+							<input type="text" class="form-control" id="monkey-login-id" placeholder="ID"
 								aria-label="ID" aria-describedby="basic-addon2">
 						</div>
-						<!-- Input: PW -->
+						<!-- Input: Login_PW -->
 						<div class="input-group mb-7">
-							<input type="password" class="form-control" id="monkey-pw" placeholder="PW"
+							<input type="password" class="form-control" id="monkey-login-pw" placeholder="PW"
 								aria-label="PW" aria-describedby="basic-addon2">
 						</div>
 					</div>
 					<!-- Button: Login -->
 					<!-- 버튼을 누르면 ajax 통신 시작 { UserLoginController }-->
-					<div class="modal-footer monkey-login-button">
+					<div class="modal-footer monkey-modal-submit-button">
 						<button type="button" class="btn btn-secondary btn-lg btn-block" id="login-submit">
 							Login</button>
 					</div>
 
 					<hr width="100%">
-
-					<div class="monkey-login-footer">
+					
+					<!-- Modal Footer :: CSS_monkey-modal-body-->
+					<div class="monkey-modal-footer">
 						<!-- Button: move Register -->
 						<button type="button" class="btn btn-secondary btn-lg col-6"
 							style="margin-right: -10px;" data-toggle="modal"
@@ -71,62 +73,61 @@
 					</div>
 
 					<!-- Modal Body -->
-					<div class="modal-body monkey-login-body">
+					<div class="modal-body monkey-modal-body">
+					
+						<!-- Input: Register_ID -->
 						<div class="input-group col-sm-12 monkey-register-id">
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">ID </span>
 							</div>
-							<input type="text" class="form-control"
+							<input type="text" class="form-control" id="monkey-register-id"
 								aria-describedby="basic-addon1">
 						</div>
-
+						
+						<!-- Input: Register_PW -->
 						<div class="input-group col-sm-12 monkey-register-id">
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">PW</span>
 							</div>
-							<input type="text" class="form-control"
+							<input type="password" class="form-control" id="monkey-register-pw"
 								aria-describedby="basic-addon1">
 						</div>
-
+						
+						<!-- Input: Register_Name -->
 						<div class="input-group col-sm-12 monkey-register-id">
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">Name</span>
 							</div>
-							<input type="text" class="form-control"
+							<input type="text" class="form-control" id="monkey-register-name"
 								aria-describedby="basic-addon1">
 						</div>
 
+						<!-- Input: Register_Gender -->
 						<div class="input-group col-sm-12 monkey-register-id">
 							<div class="input-group-prepend">
 								<label class="input-group-text" for="inputGroupSelect01">Gender</label>
 							</div>
-							<select class="custom-select" id="inputGroupSelect01">
+							<select class="custom-select" id="monkey-register-gender">
 								<option value="man" selected>Man</option>
 								<option value="woman">Woman</option>
 							</select>
 						</div>
-
+						
+						<!-- Input: Register_Address -->
 						<div class="input-group col-sm-12 monkey-register-id">
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">Address</span>
 							</div>
-							<input type="text" class="form-control"
+							<input type="text" class="form-control" id="monkey-register-address"
 								aria-describedby="basic-addon1">
 						</div>
 					</div>
 
-					<!-- Modal: Footer -->
-					<div class="modal-footer monkey-login-button">
-						<button type="button" class="btn btn-secondary btn-lg btn-block">
-							sign up</button>
-					</div>
-					<hr width="100%">
-					<div class="monkey-login-footer">
-						<button type="button" class="btn btn-secondary btn-lg col-6"
-							style="margin-right: -10px;" data-toggle="modal"
-							data-target="#modal_register">sign up</button>
-						<button type="button" class="btn btn-link col-6"
-							style="margin-left: 5px;">Forgot Password?</button>
+					<!-- Button: Register -->
+					<!-- 버튼을 누르면 ajax 통신 시작 { UserLoginController }-->
+					<div class="modal-footer monkey-modal-submit-button">
+						<button type="button" class="btn btn-secondary btn-lg btn-block" id="register-submit">
+							Create Account</button>
 					</div>
 				</div>
 			</div>

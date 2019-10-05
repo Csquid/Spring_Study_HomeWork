@@ -2,5 +2,9 @@
 
 <!-- Session Control -->
 <script>
-	init('${sessionScope.userInfo}');
+	var checkUserInfo = null;
+	const thisLiEliment = $("#" + "${page}");
+	thisLiEliment.addClass("active");
+	
+	checkUserInfo = '${sessionScope.userInfo}';
 </script>

@@ -12,6 +12,7 @@ let setRegisterY = 0;
 const modalBackDrop = $(".modal-backdrop");
 const modalLoginFrom = $("#modal_login");
 const modalLoginObject = $(".monkey-dialog-login");
+const modalRegisterFrom = $("#modal_register");
 const modalRegisterObject = $(".monkey-dialog-register");
 
 init();

@@ -2,18 +2,18 @@
 	margin-bottom: 10px;
 }
 
-.monkey-login-button {
+.monkey-modal-submit-button {
 	padding-top: 8px;
 	border-top-width: 0px;
 	justify-content: center;
 	border-top-width: 0px;
 }
 
-.monkey-login-body {
+.monkey-modal-body {
 	padding-bottom: 8px;
 }
 
-.monkey-login-footer {
+.monkey-modal-footer {
 	padding: 16px 8px 16px 16px;
 }
 
