@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script crossorigin="anonymous" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
 	<!-- Modal: Login -->
@@ -33,6 +32,7 @@
 						</div>
 					</div>
 					<!-- Button: Login -->
+					<!-- 버튼을 누르면 ajax 통신 시작 { UserLoginController }-->
 					<div class="modal-footer monkey-login-button">
 						<button type="button" class="btn btn-secondary btn-lg btn-block" id="login-submit">
 							Login</button>
@@ -133,7 +133,8 @@
 		</div>
 	</div>
 		
-	<script type="">
+	<script>
+	/*
 		let setX = 0;
 		let setY = 0; 
 
@@ -144,14 +145,20 @@
 		let setLoginY    = 0;
 		let setRegisterX = 0;
 		let setRegisterY = 0;
-
+	*/
+		var checkUserInfo = null;
+		
+		const buttonLogin = $("#button_login");
+		const buttonLogout = $("#button_logout");
+		const monkeyUserCard = $("#monkey-user-card");
+	/*
         const modalBackDrop = $(".modal-backdrop");
 		const modalLoginFrom = $("#modal_login");
 		const modalLoginObject = $(".monkey-dialog-login");
 		const modalRegisterObject = $(".monkey-dialog-register");
-        
-        init();
-
+	*/        
+        //init();
+	/*
 		function clickModalRegisterButton() {
 			modalLoginFrom.removeClass("show");
 			$(".modal-backdrop").remove("")
@@ -161,8 +168,29 @@
 			console.log("resize");
   		    init();
 		})
-
+	
         function init() {
+			//el 태그를 사용하여 세션 정보 불러오기
+			//세션 정보가 있으면 유저 카드 [display: none] 해제
+			var checkUserInfo = '${sessionScope.userInfo}';
+			
+			if(checkUserInfo === '') {
+				console.log("checkUserInfo is null");
+				checkUserInfo = null;
+			} 
+			
+			if(checkUserInfo == null) {
+				monkeyUserCard.css("display", "none");
+				
+				buttonLogin.css('display', 'block');
+				buttonLogout.css('display', 'none');
+			} else {
+				monkeyUserCard.css("display", "block");
+
+				buttonLogin.css('display', 'none');
+				buttonLogout.css('display', 'block');
+			}
+			
             const modalSize = {
 			    login: {
 			    	width: modalLoginObject.width(),
@@ -195,7 +223,7 @@
 		    modalLoginObject.css(setCssLoginObject);
 		    modalRegisterObject.css(setCssRegisterObject);
         }
-
+		*/
         $(function() {
             $("#login-submit").click(function() {
             	console.log("########################  login click button ########################");
@@ -206,18 +234,27 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "/user/id",
+                    url: "/user/login",
                     data: data,
                     dataType: "json",
                     contentType: "application/json",
                     success: function(data) {
                         console.log(data);
                         if (data.signal == "success") {
-                            window.alert("로그인에 성공했습니다.");
-							
+
 							//만약 로그인에 성공한다면 로그인창을 닫아준다.
 							modalLoginFrom.removeClass("show");
 							$(".modal-backdrop").remove("")
+							
+							//로그인 버튼 삭제
+							buttonLogin.css('display', 'none');
+
+							//로그아웃 버튼 생성
+							buttonLogout.css('display', 'block');
+							
+							//유저 카드 생성
+							monkeyUserCard.css("display", "block");
+							
                         } else {
                             window.alert("로그인에 실패했습니다.");
                         }
@@ -229,6 +266,7 @@
                 window.location.href = "/member/logout";
             })
         })
+       
 	</script>
 </body>
 </html>

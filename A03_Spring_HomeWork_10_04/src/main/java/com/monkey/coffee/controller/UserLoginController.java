@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,67 +24,53 @@ import net.sf.json.JSONObject;
 @RequestMapping(value = "/user/**")
 public class UserLoginController {
 	private static final Logger logger = LoggerFactory.getLogger(UserLoginController.class);
-	
+
 	private UserService service;
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String index(Model model, @RequestBody UserVO vo, HttpServletRequest request) {
 		logger.info("UserrLoginController /user/login");
-		logger.info("get Data: " + vo);
 		
 		HttpSession session = request.getSession();
 		
-		UserVO object =  service.userLoginService(vo);
+		UserVO object = service.searchUserIDService(vo);
 		JSONObject jsonObject = new JSONObject();
-		
-		if(object != null) {
+
+		if (object != null) {
 			jsonObject.put("id", object.getId());
-			jsonObject.put("signal", "success");
-			
-			session.setAttribute("member", object);
-			jsonObject.put("sessionName", session.getAttribute("member"));
-			
-			return jsonObject.toString();
-		} else {
-			jsonObject.put("signal", "fail");
-			
-			return jsonObject.toString();
-		}
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/id", method = RequestMethod.POST)
-	public String checkUser(Model model, @RequestBody UserVO vo, HttpServletRequest request) {
-		logger.info("UserrLoginController /user/id");
-		
-		UserVO object =  service.searchUserIDService(vo);
-		JSONObject jsonObject = new JSONObject();
-		
-		if(object != null) {
-			jsonObject.put("id", object.getId());
-			
+
 			object = service.userLoginService(vo);
-			
-			if(object != null) {
+
+			if (object != null) {
 				jsonObject.put("name", object.getName());
 				jsonObject.put("signal", "success");
 				
+				session.setAttribute("userInfo", object);
+				jsonObject.put("userInfo", session.getAttribute("userInfo"));
 				return jsonObject.toString();
 			} else {
 				jsonObject.put("detail", "Wrong Password");
 				jsonObject.put("signal", "fail");
-				
+
 				return jsonObject.toString();
 			}
-			//model.addAttribute("uid", object.getId());			
-			//return "user/login";
 		} else {
 			jsonObject.put("detail", "Wrong ID or Empty Account");
 			jsonObject.put("signal", "fail");
-			
+
 			return jsonObject.toString();
 		}
+	}
+	
+	@GetMapping(value = "/logout")
+	public String logoutMember(Model model, HttpServletRequest request) {
+		logger.info("########################  @GetMapping value /logout ########################");
+		HttpSession session = request.getSession();
 		
+		//세션 삭제
+		session.invalidate();
+		
+		return "/index";
 	}
 }

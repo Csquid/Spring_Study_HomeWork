@@ -1,6 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page session="true" %>
 
+
+<%@ include file="common/tools.jsp"%>
+<%@ include file="common/cssManage.jsp" %>
 <%@ include file="fixSection/header.jsp"%>
 <%@ include file="fixSection/usercard.jsp" %>
 
@@ -16,3 +19,4 @@
 
 <%@ include file="fixSection/footer.jsp"%>
 <%@ include file="fixSection/modal.jsp"%>
+<%@ include file="common/jsManage.jsp"%>

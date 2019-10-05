@@ -1,0 +1,36 @@
+.monkey-input {
+	margin-bottom: 10px;
+}
+
+.monkey-login-button {
+	padding-top: 8px;
+	border-top-width: 0px;
+	justify-content: center;
+	border-top-width: 0px;
+}
+
+.monkey-login-body {
+	padding-bottom: 8px;
+}
+
+.monkey-login-footer {
+	padding: 16px 8px 16px 16px;
+}
+
+.monkey-register-id {
+	margin-top: 10px;
+}
+
+.monkey-dialog-login {
+	width: 350px;
+	height: 400px;
+}
+
+.monkey-dialog-register {
+	width: 500px;
+	height: 600px;
+}
+
+.liText {
+	font-size: 30px;
+}
