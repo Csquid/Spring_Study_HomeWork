@@ -17,6 +17,7 @@
 	<%@include file='floatSection/sub3_Tab.jsp'%>
 </c:if>
 
-<%@ include file="fixSection/footer.jsp"%>
 <%@ include file="fixSection/modal.jsp"%>
+<%@ include file="fixSection/footer.jsp"%>
 <%@ include file="common/jsManage.jsp"%>
+<%@ include file="common/sessionManage.jsp"%>
