@@ -10,5 +10,6 @@ public class UserVO {
 	private String name;
 	private String gender;
 	private String address;
+	private String role;
 	
 }

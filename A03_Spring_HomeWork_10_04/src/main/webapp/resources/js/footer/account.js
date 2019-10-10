@@ -26,6 +26,7 @@ function init() {
         buttonLogout.css('display', 'none');
     } //만약 checkUserInfo 값이 존재한다면, 유저카드를 보여주며 로그인 창을 지우고 로그아웃 창을 보여준다.
     else {
+    	console.log("checkUserInfo isn't null")
         monkeyUserCard.css("display", "block");
 
         buttonLogin.css('display', 'none');
@@ -52,11 +53,13 @@ $(function() {
                     success: function(data) {
                         console.log(data);
                         if (data.signal == "success") {
-
+                        	
+                        	
                             // 만약 로그인에 성공한다면 로그인창을 닫아준다.
                             modalLoginFrom.removeClass("show");
                             $(".modal-backdrop").remove("")
-
+                            
+                            
                             // 로그인 버튼 삭제
                             buttonLogin.css('display', 'none');
 
@@ -90,7 +93,8 @@ $(function() {
 					pw: $('#monkey-register-pw').val(),
 					name: $('#monkey-register-name').val(),
 					gender: $('#monkey-register-gender').val(),
-					address: $('#monkey-register-address').val(),
+					address: $('#monkey-register-address').val()
+					
                 });
 				
 				//ajax 통신 시작
@@ -104,23 +108,14 @@ $(function() {
 						console.log(data);
 						//만약 성공했을때
                         if (data.signal == "success") {
-
+                        	 
                             // 만약 회원가입에 성공한다면 회원가입창을 닫아준다.
+                        	/*
                             modalRegisterFrom.removeClass("show");
                             $(".modal-backdrop").remove("")
-
-                            // 로그인 버튼 삭제
-                            buttonLogin.css('display', 'none');
-
-                            // 로그아웃 버튼 생성
-                            buttonLogout.css('display', 'block');
-
-                            // 유저 카드 생성
-                            monkeyUserCard.css("display", "block");
-
-                            // 회원가입 성공 즉시 유저 아이디 영역에 아이디 문자열 추가
-                            $("#sessionID").append(data.id);
-
+                            */
+                            
+                            //window.alert("if ajax success test");
                         } else {
                             window.alert("회원가입에 실패했습니다.");
                         }

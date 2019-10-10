@@ -28,6 +28,7 @@ public class HomeController {
 		
 		return "index";
 	}
+	
 	@RequestMapping(value = "/sub1_Tab", method = RequestMethod.GET)
 	public String sub1(Model model) {
 		logger.info("sub1");

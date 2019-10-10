@@ -13,7 +13,7 @@
 		AND pw = #{pw}
 	</select>
 	<insert id="insertUser" parameterType="UserVO">
-		INSERT INTO MEMBER VALUES(
+		INSERT INTO MEMBER(id, pw, name, gender, address) VALUES(
 			#{id}, 
 			#{pw}, 
 			#{name},

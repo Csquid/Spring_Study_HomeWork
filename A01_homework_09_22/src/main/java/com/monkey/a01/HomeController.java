@@ -27,6 +27,7 @@ public class HomeController {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
+		
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
@@ -40,7 +41,7 @@ public class HomeController {
 	public String test1() {
 		logger.info("Welcome to Test1 Function");
 		
-		return "test1";
+		return "test2";
 	}
 	
 	@RequestMapping("/test2")

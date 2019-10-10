@@ -63,6 +63,7 @@ public class UserLoginController {
 		}
 	}
 	
+	
 	@GetMapping(value = "/logout")
 	public String logoutUser(Model model, HttpServletRequest request) {
 		logger.info("########################  @GetMapping value /logout ########################");
@@ -73,6 +74,7 @@ public class UserLoginController {
 		
 		return "/index";
 	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -86,6 +88,9 @@ public class UserLoginController {
 		JSONObject jsonObject = new JSONObject();
 		
 		logger.info("checkResult: " + checkResult);
+		
+		/*
+		 * 
 		//회원가입이 되었을때
 		if(checkResult > 0) {
 			session.setAttribute("userInfo", vo);
@@ -97,5 +102,13 @@ public class UserLoginController {
 			return jsonObject.toString();
 		}
 		
+		*/
+		if(checkResult > 0) {
+			jsonObject.put("signal", "success");	
+		} else {
+			jsonObject.put("signal", "fail");
+		}
+		
+		return jsonObject.toString();
 	}
 }
