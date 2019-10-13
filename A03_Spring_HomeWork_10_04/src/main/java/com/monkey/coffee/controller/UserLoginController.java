@@ -85,8 +85,6 @@ public class UserLoginController {
 	public String registerUser(Model model, @RequestBody UserVO vo, HttpServletRequest request) {
 		logger.info("UserrLoginController /user/register");
 		
-		HttpSession session = request.getSession();
-		
 		int checkResult = service.insertUser(vo);
 		
 		JSONObject jsonObject = new JSONObject();
@@ -107,9 +105,12 @@ public class UserLoginController {
 		}
 		
 		*/
+		
+		//회원가입이 되었을때 checkResult는 양수를 반환
+		//회원가입이 되지 않았을때 checkResult는 음수를 반환
 		if(checkResult > 0) {
 			jsonObject.put("signal", "success");	
-		} else {
+		} else {	
 			jsonObject.put("signal", "fail");
 		}
 		

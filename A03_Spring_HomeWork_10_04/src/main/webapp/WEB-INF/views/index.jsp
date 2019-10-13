@@ -11,13 +11,13 @@
 	<%@include file='floatSection/home.jsp'%>
 </c:if>
 <c:if test="${page == 'sub1_Tab'}" >
-	<%@include file='floatSection/sub1_Tab.jsp'%>
+	<%@include file='floatSection/subs/sub1_Tab.jsp'%>
 </c:if>
 <c:if test="${page == 'sub2_Tab'}" >
-	<%@include file='floatSection/sub2_Tab.jsp'%>
+	<%@include file='floatSection/subs/sub2_Tab.jsp'%>
 </c:if>
 <c:if test="${page == 'sub3_Tab'}" >
-	<%@include file='floatSection/sub3_Tab.jsp'%>
+	<%@include file='floatSection/subs/sub3_Tab.jsp'%>
 </c:if>
 <c:if test="${page == 'parallax'}" >
 	<%@include file='floatSection/parallax.jsp'%>
@@ -25,7 +25,7 @@
 <c:if test="${page == 'admin'}">
 	<%@include file='floatSection/adminPage/adminPage.jsp'%>
 </c:if>
-<c:if test="${page == 'admin_user_table'}">
+<c:if test="${page == 'admin_table'}">
 	<%@include file='floatSection/adminPage/adminPageUserTable.jsp'%>
 </c:if>
 

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div id="monkey-user-card" class="col-sm-4 col-md-4 col-lg-2 mt-2"
+<div id="monkey-user-card" class=""
 	style="float: right; display: none;">
 	<div class="card">
 		<img class="card-img-top" src="/images/admin_icon.png" width="100">

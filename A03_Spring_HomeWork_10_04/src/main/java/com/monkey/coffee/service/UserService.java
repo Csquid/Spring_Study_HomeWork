@@ -1,5 +1,7 @@
 package com.monkey.coffee.service;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 
 import com.monkey.coffee.mapper.UserMapper;
@@ -13,6 +15,9 @@ public class UserService {
 	
 	private UserMapper mapper;
 	
+	public ArrayList<UserVO> searchUsersService() {
+		return mapper.searchUsers();
+	}
 	public UserVO searchUserIDService(UserVO vo) {
 		return mapper.searchUserID(vo);
 	}

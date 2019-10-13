@@ -3,15 +3,21 @@
 "http://mybatis.opg/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.monkey.coffee.mapper.UserMapper">
+	<select id="searchUsers" resultType="UserVO">
+		SELECT * FROM MEMBER
+	</select>
+	
 	<select id="searchUserID" resultType="UserVO">
 		SELECT * FROM MEMBER WHERE
 		id = #{id}
 	</select>
+	
 	<select id="userLogin" resultType="UserVO">
 		SELECT * FROM MEMBER WHERE
 		id = #{id}
 		AND pw = #{pw}
 	</select>
+	
 	<insert id="insertUser" parameterType="UserVO">
 		INSERT INTO MEMBER(id, pw, name, gender, address) VALUES(
 			#{id}, 

@@ -7,7 +7,7 @@
 	</div>
 	<div class="col-lg-10 row">
 		<div class="container">
-			<h3>User Table</h3>
+			<h3 style="margin-top: 30px;">User Table</h3>
 			<table class="table table-bordered table-striped table-hover">
 				<thead>
 					<tr>
@@ -19,42 +19,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<!-- th: 컬럼 쪽 font를 진하기를 준다. -->
-						<th scope="row">admin</th>
-						<td id="table-name">user1</td>
-						<td id="table-gender">man</td>
-						<td id="table-address">daegu</td>
-						<td id="table-role">admin</td>
-					</tr>
-					<tr>
-						<th scope="row"></th>
-						<td id="table-name"></td>
-						<td id="table-gender"></td>
-						<td id="table-address"></td>
-						<td id="table-role"></td>
-					</tr>
-					<tr>
-						<th scope="row"></th>
-						<td id="table-name"></td>
-						<td id="table-gender"></td>
-						<td id="table-address"></td>
-						<td id="table-role"></td>
-					</tr>
-					<tr>
-						<th scope="row"></th>
-						<td id="table-name"></td>
-						<td id="table-gender"></td>
-						<td id="table-address"></td>
-						<td id="table-role"></td>
-					</tr>
-					<tr>
-						<th scope="row"></th>
-						<td id="table-name"></td>
-						<td id="table-gender"></td>
-						<td id="table-address"></td>
-						<td id="table-role"></td>
-					</tr>
+					<c:forEach var="i" begin="0" end="${userInfoTable.size() - 1}">
+						<tr>
+							<th scope="row">${userInfoTable[i].id}</th>
+							<td id="table-name">${userInfoTable[i].name}</td>
+							<td id="table-gender">${userInfoTable[i].gender}</td>
+							<td id="table-address">${userInfoTable[i].address}</td>
+							<td id="table-role">${userInfoTable[i].role}</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

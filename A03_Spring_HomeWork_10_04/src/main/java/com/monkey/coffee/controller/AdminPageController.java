@@ -1,5 +1,7 @@
 package com.monkey.coffee.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -29,7 +31,7 @@ public class AdminPageController {
 		
 		HttpSession session = request.getSession();
 		
-		if(this.checkSessionUserRole(session) == true) {
+		if(this.checkSessionUserRole(session) == true) {	
 			model.addAttribute("page", "admin");
 			
 			return "./index";
@@ -45,9 +47,25 @@ public class AdminPageController {
 	@RequestMapping(value = "/user_table", method = RequestMethod.GET)
 	public String user_table(Model model, HttpServletRequest request) {
 		logger.info("AdminPageController /admin/table");
-		model.addAttribute("page", "admin_user_table");
 		
-		return "./index";
+		HttpSession session = request.getSession();
+		ArrayList<UserVO> getObject;
+		
+		//TODO: db 연동하여 유저 테이블 불러오기.
+		if(this.checkSessionUserRole(session) == true) {
+			getObject = service.searchUsersService();
+			
+			logger.info("getObject: " + getObject);
+			
+			model.addAttribute("page", "admin_table");
+			model.addAttribute("userInfoTable", getObject);
+			
+			return "./index";
+		} else {
+			model.addAttribute("page", "home");
+			model.addAttribute("error", "권한이 없습니다.");
+			return "./index";
+		}
 	}
 	
 	private boolean checkSessionUserRole(HttpSession nSession) {
