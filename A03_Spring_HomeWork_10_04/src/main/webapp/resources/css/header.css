@@ -34,3 +34,63 @@
 .liText {
 	font-size: 30px;
 }
+
+.content {
+	padding: 10px;
+}
+
+#sub2-page {
+	height: 100%;
+	background-image: url("../images/background-images/alone_1.jpg");
+}
+
+.footer {
+	padding: 20px;
+	background-color: #343a40;
+}
+
+#monkey-home {
+	height: 100%;
+}
+
+#myVideo {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	min-width: 100%;
+	min-height: 100%;
+}
+
+/* Add some content at the bottom of the video/page */
+.content_footer {
+	position: fixed;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	color: #f1f1f1;
+	width: 100%;
+	padding: 20px;
+}
+
+#video-background {
+	/*  making the video fullscreen  */
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	z-index: -100;
+}
+
+#admin-page {
+	height: 100%;
+}
+
+#admin-image {
+	height: 100%; background-repeat : no-repeat;
+	background-position: top center;
+	background-size: cover;
+	background-image: url("/images/background-images/leader_1.jpg");
+	background-repeat: no-repeat;
+}

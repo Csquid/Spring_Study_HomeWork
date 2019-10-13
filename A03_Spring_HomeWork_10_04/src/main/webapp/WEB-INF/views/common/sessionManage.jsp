@@ -3,8 +3,28 @@
 <!-- Session Control -->
 <script>
 	var checkUserInfo = null;
-	const thisLiEliment = $("#" + "${page}");
-	thisLiEliment.addClass("active");
+	let thisLiEliment;
+	if("${page}" != "") {
+		thisLiEliment = $("#" + "${page}");
+		thisLiEliment.addClass("active");
+	}
+	
+	if("${error}" != "") {
+		window.alert("${error}");
+	}
 	
 	checkUserInfo = '${sessionScope.userInfo}';
+	
+	if(checkUserInfo != '') {
+		let userRole = null;
+		userRole = '${sessionScope.userInfo.getRole()}';
+		if(window.location.href.indexOf("/admin") == -1 && userRole == "admin") {
+			console.log("break - true");
+			$("#user-card-admin-page").css("display", "block");
+		} else {
+			console.log("break - false");
+			$("#user-card-admin-page").css("display", "none");
+		}
+	}
+ 		
 </script>

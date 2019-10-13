@@ -1,5 +1,7 @@
 package com.monkey.coffee.controller;
-//https://addio3305.tistory.com/91
+
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -37,11 +39,13 @@ public class UserLoginController {
 		UserVO object = service.searchUserIDService(vo);
 		JSONObject jsonObject = new JSONObject();
 
+		// service.searchUserIDService(vo); 를 통하여 id가 존재하는지 체크
 		if (object != null) {
 			jsonObject.put("id", object.getId());
 
 			object = service.userLoginService(vo);
-
+			
+			//service.userLoginService(vo); 을 통해 로그인 가능 여부를 체크함
 			if (object != null) {
 				jsonObject.put("name", object.getName());
 				jsonObject.put("signal", "success");
@@ -72,7 +76,7 @@ public class UserLoginController {
 		//세션 삭제
 		session.invalidate();
 		
-		return "/index";
+		return "./index";
 	}
 	
 	

@@ -29,6 +29,7 @@ public class HomeController {
 		return "index";
 	}
 	
+	
 	@RequestMapping(value = "/sub1_Tab", method = RequestMethod.GET)
 	public String sub1(Model model) {
 		logger.info("sub1");
@@ -50,6 +51,13 @@ public class HomeController {
 	public String sub3(Model model) {
 		logger.info("sub3");
 		model.addAttribute("page", "sub3_Tab");
+		
+		return "index";
+	}
+	@RequestMapping(value = "/parallax", method = RequestMethod.GET)
+	public String parallax(Model model) {
+		logger.info("sub3");
+		model.addAttribute("page", "parallax");
 		
 		return "index";
 	}

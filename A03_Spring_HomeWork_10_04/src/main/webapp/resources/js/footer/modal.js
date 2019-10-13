@@ -15,7 +15,7 @@ const modalLoginObject = $(".monkey-dialog-login");
 const modalRegisterFrom = $("#modal_register");
 const modalRegisterObject = $(".monkey-dialog-register");
 
-init();
+modal_init();
 
 function clickModalRegisterButton() {
 	modalLoginFrom.removeClass("show");
@@ -24,10 +24,10 @@ function clickModalRegisterButton() {
 
 $(window).resize(function() {
 	console.log("resize");
-	init();
+	modal_init();
 })
 
-function init() {
+function modal_init() {
 	const modalSize = {
 		login : {
 			width : modalLoginObject.width(),
@@ -38,7 +38,7 @@ function init() {
 			height : modalRegisterObject.height()
 		}
 	}
-
+	
 	winHeight = window.innerHeight;
 	winWidth = window.innerWidth;
 
