@@ -38,6 +38,7 @@
 						<div class="input-group mb-7 monkey-input">
 							<input type="text" class="form-control" id="monkey-login-id"
 								placeholder="ID" aria-label="ID" aria-describedby="basic-addon2">
+
 						</div>
 						<!-- Input: Login_PW -->
 						<div class="input-group mb-7">
@@ -86,12 +87,11 @@
 						<div class="alert alert-danger col-12" role="alert"
 							id="register-alert-input-null"
 							style="margin-top: 15px; margin-bottom: 0px; display: none">
-								아이디, 패스워드, 이름은 필수로 적어야합니다.
-							</div>
+							아이디, 패스워드, 이름은 필수로 적어야합니다.</div>
 					</div>
-					
+
 					<hr width="100%" style="margin-top: 5px; margin-bottom: 5px;">
-					
+
 					<!-- Modal Body -->
 					<div class="modal-body monkey-modal-body row">
 
@@ -102,6 +102,11 @@
 							</div>
 							<input type="text" class="form-control" id="monkey-register-id"
 								aria-describedby="basic-addon1">
+							<!-- check overlap -->
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="button"
+									id="check-overlap-id">Check</button>
+							</div>
 						</div>
 
 						<!-- Input: Register_PW -->
@@ -111,6 +116,7 @@
 							</div>
 							<input type="password" class="form-control"
 								id="monkey-register-pw" aria-describedby="basic-addon1">
+
 						</div>
 
 						<!-- Input: Register_Name -->
@@ -120,6 +126,11 @@
 							</div>
 							<input type="text" class="form-control" id="monkey-register-name"
 								aria-describedby="basic-addon1">
+							<!-- check overlap -->
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="button"
+									id="check-overlap-name">Check</button>
+							</div>
 						</div>
 
 						<!-- Input: Register_Gender -->
@@ -147,7 +158,7 @@
 					<!-- 버튼을 누르면 ajax 통신 시작 { UserLoginController }-->
 					<div class="modal-footer monkey-modal-submit-button">
 						<button type="button" class="btn btn-secondary btn-lg btn-block"
-							id="register-submit">Create Account</button>
+							id="register-submit" disabled >Create Account</button>
 					</div>
 				</div>
 			</div>

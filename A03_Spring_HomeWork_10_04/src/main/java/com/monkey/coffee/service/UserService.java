@@ -21,6 +21,9 @@ public class UserService {
 	public UserVO searchUserIDService(UserVO vo) {
 		return mapper.searchUserID(vo);
 	}
+	public UserVO searchUserNameService(UserVO vo) {
+		return mapper.searchUserName(vo);
+	}
 	public UserVO userLoginService(UserVO vo) {
 		return mapper.userLogin(vo);
 	}

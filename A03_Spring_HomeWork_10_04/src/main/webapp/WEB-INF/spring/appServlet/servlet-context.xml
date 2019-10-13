@@ -28,7 +28,16 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/move/**" />
+			<!-- <exclude-mapping path="/login/**" /> <exclude-mapping path="/register/**" 
+				/> -->
+			<beans:bean id="commonInterceptor"
+				class="com.monkey.coffee.commonInterCeptor.CommonInterCeptor"></beans:bean>
+		</interceptor>
+	</interceptors>
 	<context:component-scan
 		base-package="com.monkey.coffee" />
 

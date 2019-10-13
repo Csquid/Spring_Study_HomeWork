@@ -32,7 +32,7 @@ public class UserLoginController {
 	@ResponseBody
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String index(Model model, @RequestBody UserVO vo, HttpServletRequest request) {
-		logger.info("UserrLoginController /user/login");
+		logger.info("UserLoginController /user/login");
 		
 		HttpSession session = request.getSession();
 		
@@ -83,7 +83,7 @@ public class UserLoginController {
 	@ResponseBody
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerUser(Model model, @RequestBody UserVO vo, HttpServletRequest request) {
-		logger.info("UserrLoginController /user/register");
+		logger.info("UserLoginController /user/register");
 		
 		int checkResult = service.insertUser(vo);
 		
@@ -109,6 +109,40 @@ public class UserLoginController {
 		//회원가입이 되었을때 checkResult는 양수를 반환
 		//회원가입이 되지 않았을때 checkResult는 음수를 반환
 		if(checkResult > 0) {
+			jsonObject.put("signal", "success");	
+		} else {	
+			jsonObject.put("signal", "fail");
+		}
+		
+		return jsonObject.toString();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/register/overlap/id", method = RequestMethod.POST)
+	public String registerOverlapID(Model model, @RequestBody UserVO vo, HttpServletRequest request) {
+		logger.info("UserLoginController register/overlap/id");
+		
+		UserVO object = service.searchUserIDService(vo);
+		JSONObject jsonObject = new JSONObject();
+		
+		if(object != null) {
+			jsonObject.put("signal", "success");	
+		} else {	
+			jsonObject.put("signal", "fail");
+		}
+		
+		return jsonObject.toString();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/register/overlap/name", method = RequestMethod.POST)
+	public String registerOverlapName(Model model, @RequestBody UserVO vo, HttpServletRequest request) {
+		logger.info("UserLoginController register/overlap/name");
+		
+		UserVO object = service.searchUserNameService(vo);
+		JSONObject jsonObject = new JSONObject();
+		
+		if(object != null) {
 			jsonObject.put("signal", "success");	
 		} else {	
 			jsonObject.put("signal", "fail");

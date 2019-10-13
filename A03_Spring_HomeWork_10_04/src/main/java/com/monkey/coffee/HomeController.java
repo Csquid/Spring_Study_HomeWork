@@ -54,7 +54,7 @@ public class HomeController {
 		
 		return "index";
 	}
-	@RequestMapping(value = "/parallax", method = RequestMethod.GET)
+	@RequestMapping(value = "/move/parallax", method = RequestMethod.GET)
 	public String parallax(Model model) {
 		logger.info("sub3");
 		model.addAttribute("page", "parallax");

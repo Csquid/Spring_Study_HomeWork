@@ -19,6 +19,15 @@ const r_object = {
 	r_name : r_name
 };
 
+const r_object_overlap = {
+	id : r_id,
+	r_name : r_name
+};
+
+const checkOverlapObject = {
+	id : true,
+	name : true
+}
 
 account_init();
 
@@ -119,10 +128,10 @@ $(function() {
 
 					// 유저 카드 생성
 					monkeyUserCard.css("display", "block");
-					
+
 					// 로그인 성공 즉시 유저 아이디 영역에 아이디 문자열 추가
 					$("#sessionID").append(data.id);
-					if(data.userInfo.role === 'admin')
+					if (data.userInfo.role === 'admin')
 						$("#user-card-admin-page").css("display", "block");
 				} else {
 
@@ -148,7 +157,7 @@ $(function() {
 			})
 
 			$("#register-alert-input-null").css("display", "block");
-			
+
 			return;
 		}
 
@@ -182,8 +191,79 @@ $(function() {
 			}
 		})
 	})
+
+	$("#check-overlap-id").click(function() {
+
+		// 데이터 받아오는 부분
+		const checkOverlapID = JSON.stringify({
+			id : r_id.val()
+		});
+
+		// ajax 통신 시작
+		$.ajax({
+			type : "POST",
+			url : "/user/register/overlap/id",
+			data : checkOverlapID,
+			dataType : "json",
+			contentType : "application/json",
+			success : function(data) {
+				console.log(data);
+				// 만약 성공했을때
+				if (data.signal == "success") { // 만약 회원가입에 성공한다면 회원가입창을 닫아준다.
+					checkOverlapObject.id = true;
+					window.alert("아이디가 중복됩니다.");
+
+					checkOverlapIdName(checkOverlapObject);
+				} else {
+					checkOverlapObject.id = false;
+
+					window.alert("아이디가 중복되지않습니다.");
+					checkOverlapIdName(checkOverlapObject);
+				}
+			}
+		})
+	})
+	$("#check-overlap-name").click(function() {
+
+		// 데이터 받아오는 부분
+		const checkOverlapName = JSON.stringify({
+			name : r_name.val()
+		});
+
+		// ajax 통신 시작
+		$.ajax({
+			type : "POST",
+			url : "/user/register/overlap/name",
+			data : checkOverlapName,
+			dataType : "json",
+			contentType : "application/json",
+			success : function(data) {
+				console.log(data);
+				// 만약 성공했을때
+				if (data.signal == "success") { // 만약 회원가입에 성공한다면 회원가입창을 닫아준다.
+					checkOverlapObject.name = true;
+					window.alert("닉네임이 중복됩니다.");
+
+					checkOverlapIdName(checkOverlapObject);
+				} else {
+					checkOverlapObject.name = false;
+					window.alert("닉네임이 중복되지않습니다.");
+
+					checkOverlapIdName(checkOverlapObject);
+				}
+			}
+		})
+	})
 })
 
+function checkOverlapIdName(overlapObject) {
+	console.log(overlapObject);
+	if (overlapObject.id == false && overlapObject.name == false) {
+		$("#register-submit").removeAttr("disabled");
+	} else {
+		$("#register-submit").attr("disabled", "disabled");
+	}
+}
 $('#logout').click(function() {
 	window.location.href = "/user/logout";
 });
@@ -200,4 +280,8 @@ $.each(r_object, function(index, item) {
 		item.addClass("is-valid");
 		item.removeClass("is-invalid");
 	})
+})
+
+$.each(r_object_overlap, function(index, item) {
+	
 })
