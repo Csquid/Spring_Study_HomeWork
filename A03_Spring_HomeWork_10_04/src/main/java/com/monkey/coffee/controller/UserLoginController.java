@@ -5,6 +5,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.ObjectUtils.Null;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -83,34 +84,49 @@ public class UserLoginController {
 	@ResponseBody
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerUser(Model model, @RequestBody UserVO vo, HttpServletRequest request) {
+		JSONObject jsonObject = new JSONObject();
 		logger.info("UserLoginController /user/register");
+		
+		/*
+		 *	TODO: 유효성 검사. 
+		 * 	null이 아닌경우: 데이터 중복 O
+		 * 	null인 경우: 데이터 중복 X
+		 */
+		
+		//아이디 검색
+		UserVO checkOverlapID = service.searchUserIDService(vo);
+		//닉네임 검색
+		UserVO checkOverlapName = service.searchUserNameService(vo);
+		
+		jsonObject.put("overlap_id", false);
+		jsonObject.put("overlap_name", false);
+		
+		//만약 id, name 데이터 검색에서 데이터가 존재: 데이터가 중복된다. 
+		if(checkOverlapID != null || checkOverlapName != null) {
+			jsonObject.put("signal", "fail");
+			jsonObject.put("overlap", true);
+			if(checkOverlapID != null) {
+				jsonObject.put("overlap_id", true);
+			}
+			if(checkOverlapName != null) {
+				jsonObject.put("overlap_name", true);
+			}
+			
+			return jsonObject.toString();
+		} else {
+			jsonObject.put("overlap", false);
+		}
 		
 		int checkResult = service.insertUser(vo);
 		
-		JSONObject jsonObject = new JSONObject();
-		
 		logger.info("checkResult: " + checkResult);
-		
-		/*
-		 * 
-		//회원가입이 되었을때
-		if(checkResult > 0) {
-			session.setAttribute("userInfo", vo);
-			jsonObject.put("signal", "success");
-			jsonObject.put("userInfo", session.getAttribute("userInfo"));
-			return jsonObject.toString();
-		} else {
-			jsonObject.put("signal", "fail");
-			return jsonObject.toString();
-		}
-		
-		*/
 		
 		//회원가입이 되었을때 checkResult는 양수를 반환
 		//회원가입이 되지 않았을때 checkResult는 음수를 반환
-		if(checkResult > 0) {
+		if(checkResult > 0) {						//register success
+			
 			jsonObject.put("signal", "success");	
-		} else {	
+		} else {									//register fail
 			jsonObject.put("signal", "fail");
 		}
 		

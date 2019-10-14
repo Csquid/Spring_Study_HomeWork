@@ -19,6 +19,13 @@ const r_object = {
 	r_name : r_name
 };
 
+const r_al_id = $("#register-alert-overlap-id");
+const r_al_name = $("#register-alert-overlap-name");
+const r_alert_object = {
+	id: r_al_id,
+	name: r_al_name
+}
+
 const r_object_overlap = {
 	id : r_id,
 	r_name : r_name
@@ -62,7 +69,7 @@ function account_init() {
 
 function login_default_init(err) {
 
-	for ( let n in l_object) {
+	for ( let n in l_object ) {
 		l_object[n].text("");
 		l_object[n].removeClass("is-valid");
 		l_object[n].removeClass("is-invalid");
@@ -89,8 +96,7 @@ $(function() {
 
 			$.each(l_object, function(index, item) {
 				if (item.val() == '')
-					item.addClass('is-invalid')
-
+					item.addClass('is-invalid');
 			})
 
 			$("#login-alert-input-null").css("display", "block");
@@ -149,7 +155,10 @@ $(function() {
 	$("#register-submit").click(function() {
 		// 만약 아이디, 패스워드, 이름 적는 공간이 비었다면
 		if (r_id.val() == '' || r_pw.val() == '' || r_name.val() == '') {
-
+				
+			console.log("$('#register-submit').click(function");
+			
+			
 			$.each(r_object, function(index, item) {
 				if (item.val() == '')
 					item.addClass('is-invalid');
@@ -185,13 +194,36 @@ $(function() {
 					modalRegisterFrom.removeClass("show");
 					$(".modal-backdrop").remove("")
 
-				} else {
+				} else {		//실패했을경우.
+					if(data.overlap) {		//데이터가 중복된 경우
+						if(data.overlap_id) {
+							//회원가입 인 경우 무조건 block 처리
+							console.log("break");
+							$("#register-alert-overlap-id").css("display", "block");
+						} else {
+							$("#register-alert-overlap-id").css("display", "none");
+						}
+						
+						if(data.overlap_name) {
+							$("#register-alert-overlap-name").css("display", "block");
+						} else {
+							$("#register-alert-overlap-name").css("display", "none");
+						}
+					}
+					
 					window.alert("회원가입에 실패했습니다.");
 				}
 			}
 		})
 	})
 
+	/*
+	 *  ----- ajax -----
+	 * 
+	 *	중복 처리 - 아이디
+	 *
+	 *  ----------------
+	 */
 	$("#check-overlap-id").click(function() {
 
 		// 데이터 받아오는 부분
@@ -211,18 +243,26 @@ $(function() {
 				// 만약 성공했을때
 				if (data.signal == "success") { // 만약 회원가입에 성공한다면 회원가입창을 닫아준다.
 					checkOverlapObject.id = true;
-					window.alert("아이디가 중복됩니다.");
-
-					checkOverlapIdName(checkOverlapObject);
+					
+					r_alert_object.id.css("display", "block");
 				} else {
 					checkOverlapObject.id = false;
 
-					window.alert("아이디가 중복되지않습니다.");
-					checkOverlapIdName(checkOverlapObject);
+					r_alert_object.id.css("display", "none");
 				}
+				
+				checkOverlapIdName(checkOverlapObject);
 			}
 		})
 	})
+	
+	/*
+	 *  ----- ajax -----
+	 * 
+	 *	중복 처리 - 닉네임
+	 *
+	 *  ----------------
+	 */
 	$("#check-overlap-name").click(function() {
 
 		// 데이터 받아오는 부분
@@ -242,15 +282,15 @@ $(function() {
 				// 만약 성공했을때
 				if (data.signal == "success") { // 만약 회원가입에 성공한다면 회원가입창을 닫아준다.
 					checkOverlapObject.name = true;
-					window.alert("닉네임이 중복됩니다.");
-
-					checkOverlapIdName(checkOverlapObject);
+					
+					r_alert_object.name.css("display", "block");
 				} else {
 					checkOverlapObject.name = false;
-					window.alert("닉네임이 중복되지않습니다.");
-
-					checkOverlapIdName(checkOverlapObject);
+					
+					r_alert_object.name.css("display", "none");
 				}
+				
+				checkOverlapIdName(checkOverlapObject);
 			}
 		})
 	})
@@ -264,6 +304,7 @@ function checkOverlapIdName(overlapObject) {
 		$("#register-submit").attr("disabled", "disabled");
 	}
 }
+
 $('#logout').click(function() {
 	window.location.href = "/user/logout";
 });

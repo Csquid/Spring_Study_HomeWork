@@ -56,15 +56,15 @@
 					<hr width="100%">
 
 					<!-- Modal Footer :: CSS_monkey-modal-body-->
-					<div class="monkey-modal-footer">
+					<div class="monkey-modal-footer row">
 						<!-- Button: move Register -->
 						<button type="button" class="btn btn-secondary btn-lg col-6"
 							style="margin-right: -10px;" data-toggle="modal"
 							data-target="#modal_register"
 							onclick="clickModalRegisterButton()">sign up</button>
 						<!-- Button: forgotAccess -->
-						<button type="button" class="btn btn-link col-6"
-							style="margin-left: 5px;">Forgot Password?</button>
+						<button type="button" class="btn btn-link col-6">Forgot
+							Password?</button>
 					</div>
 
 				</div>
@@ -88,6 +88,15 @@
 							id="register-alert-input-null"
 							style="margin-top: 15px; margin-bottom: 0px; display: none">
 							아이디, 패스워드, 이름은 필수로 적어야합니다.</div>
+						<div class="alert alert-danger col-12" role="alert"
+							id="register-alert-overlap-id"
+							style="margin-top: 10px; margin-bottom: 0px; display: none">
+							아이디가 중복됩니다.</div>
+						<div class="alert alert-danger col-12" role="alert"
+							id="register-alert-overlap-name"
+							style="margin-top: 10px; margin-bottom: 0px; display: none">
+							닉네임이 중복됩니다.</div>
+
 					</div>
 
 					<hr width="100%" style="margin-top: 5px; margin-bottom: 5px;">
@@ -158,7 +167,7 @@
 					<!-- 버튼을 누르면 ajax 통신 시작 { UserLoginController }-->
 					<div class="modal-footer monkey-modal-submit-button">
 						<button type="button" class="btn btn-secondary btn-lg btn-block"
-							id="register-submit" disabled >Create Account</button>
+							id="register-submit" disabled>Create Account</button>
 					</div>
 				</div>
 			</div>
