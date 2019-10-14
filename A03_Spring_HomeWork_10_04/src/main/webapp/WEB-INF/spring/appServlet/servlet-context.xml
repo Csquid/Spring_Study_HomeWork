@@ -28,10 +28,11 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+
 	<interceptors>
 		<interceptor>
 			<mapping path="/move/**" />
+			<mapping path="/admin/**" />
 			<!-- <exclude-mapping path="/login/**" /> <exclude-mapping path="/register/**" 
 				/> -->
 			<beans:bean id="commonInterceptor"

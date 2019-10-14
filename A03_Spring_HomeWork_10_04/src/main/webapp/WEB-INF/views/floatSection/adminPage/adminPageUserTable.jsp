@@ -10,6 +10,9 @@
 			<li><a href="/admin/user_table" style="color: black;">
 					<h2>User Table</h2>
 			</a></li>
+			<li><a href="/admin/user_table/search" style="color: black;">
+					<h2>User Table Role</h2>
+			</a></li>
 		</ul>
 	</div>
 	<div class="col-lg-9 row">
@@ -38,11 +41,11 @@
 							<td id="table-address">${userInfoTable[i].address}</td>
 							<!-- <td id="table-role">${userInfoTable[i].role}</td> -->
 							<td><select class="custom-select" id="table-role">
-									<option value="1" selected>admin</option>
-									<option value="2">staff</option>
-									<option value="2">silver</option>
-									<option value="3">bronze</option>
-									<option value="3">iron</option>
+									<option value="admin" selected>admin</option>
+									<option value="staff">staff</option>
+									<option value="silver">silver</option>
+									<option value="bronze">bronze</option>
+									<option value="iron">iron</option>
 							</select></td>
 							<td><button class="btn btn-outline-secondary" type="button"
 									id="check-overlap-id" style="width: 100%">Check</button></td>

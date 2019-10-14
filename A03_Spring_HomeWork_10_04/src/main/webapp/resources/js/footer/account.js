@@ -244,7 +244,7 @@ $(function() {
 			success : function(data) {
 				console.log(data);
 				// 만약 성공했을때
-				if (data.signal == "success") { // 만약 회원가입에 성공한다면 회원가입창을 닫아준다.
+				if (data.signal == "success") { 
 					checkOverlapObject.id = true;
 					
 					r_alert_object.id.css("display", "block");
@@ -283,7 +283,7 @@ $(function() {
 			success : function(data) {
 				console.log(data);
 				// 만약 성공했을때
-				if (data.signal == "success") { // 만약 회원가입에 성공한다면 회원가입창을 닫아준다.
+				if (data.signal == "success") { 
 					checkOverlapObject.name = true;
 					
 					r_alert_object.name.css("display", "block");
@@ -294,6 +294,32 @@ $(function() {
 				}
 				
 				checkOverlapIdName(checkOverlapObject);
+			}
+		})
+	})
+	
+	$("#admin-table-search-role-button").click(function() {
+
+		// 데이터 받아오는 부분
+		const searchRoleData = JSON.stringify({
+			role: $("#admin-table-select-role").val()
+		});
+
+		// ajax 통신 시작
+		$.ajax({
+			type : "POST",
+			url : "/admin/user_table/search/role",
+			data : searchRoleData,
+			dataType : "json",
+			contentType : "application/json",
+			success : function(data) {
+				// 만약 성공했을때
+				if (data.signal == "success") {
+					console.log(data);
+				} else {
+					
+				}
+				
 			}
 		})
 	})

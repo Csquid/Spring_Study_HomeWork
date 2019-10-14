@@ -14,13 +14,20 @@
 	</select>
 
 	<select id="searchUserName" resultType="UserVO">
-		SELECT * FROM MEMBER WHERE
+		SELECT * FROM MEMBER
+		WHERE
 		name = #{name}
 	</select>
-
+	
+	<select id="searchUserRoleEquals" resultType="UserVO">
+		SELECT * FROM MEMBER WHERE
+		role = #{role}
+	</select>
+	
 	<select id="userLogin" resultType="UserVO">
 		SELECT * FROM MEMBER WHERE
-		id = #{id} AND pw = #{pw}
+		id =
+		#{id} AND pw = #{pw}
 	</select>
 
 	<insert id="insertUser" parameterType="UserVO">

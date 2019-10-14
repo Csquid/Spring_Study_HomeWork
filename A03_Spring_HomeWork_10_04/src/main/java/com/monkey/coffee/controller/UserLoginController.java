@@ -35,7 +35,7 @@ public class UserLoginController {
 	public String index(Model model, @RequestBody UserVO vo, HttpServletRequest request) {
 		logger.info("UserLoginController /user/login");
 		logger.info(vo.toString());
-		
+	
 		HttpSession session = request.getSession();
 		
 		UserVO object = service.searchUserIDService(vo);
