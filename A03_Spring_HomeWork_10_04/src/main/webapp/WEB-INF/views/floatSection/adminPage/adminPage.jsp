@@ -3,16 +3,16 @@
 	pageEncoding="UTF-8"%>
 <div id="admin-image">
 	<div class="content row" id="admin-page">
-		<div class="col-lg-2" id="admin-page-side" style="margin-top: 30px;">
-			<h1 style="color: #6c757d" style="display: block;">Admin Page</h1>
+		<div class="col-lg-3" id="admin-page-side" style="margin-top: 30px;">
 			<!-- Default: padding-left: 40px -->
+			<li><a href="/admin" style="color: #6c757d; text-decoration:none;"><h1>Admin Page</h1></a></li>
 			<ul style="list-style: none;">
 				<li><a href="/admin/user_table" style="color: black;">
 						<h2 style="color: white;">User Table</h2>
 				</a></li>
 			</ul>
 		</div>
-		<div class="col-lg-10 row">
+		<div class="col-lg-9">
 			<div></div>
 		</div>
 	</div>

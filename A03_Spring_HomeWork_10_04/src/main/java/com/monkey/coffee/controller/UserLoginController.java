@@ -34,6 +34,7 @@ public class UserLoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String index(Model model, @RequestBody UserVO vo, HttpServletRequest request) {
 		logger.info("UserLoginController /user/login");
+		logger.info(vo.toString());
 		
 		HttpSession session = request.getSession();
 		
@@ -65,7 +66,6 @@ public class UserLoginController {
 			jsonObject.put("signal", "fail");
 
 			return jsonObject.toString();
-			a;
 		}
 	}
 	

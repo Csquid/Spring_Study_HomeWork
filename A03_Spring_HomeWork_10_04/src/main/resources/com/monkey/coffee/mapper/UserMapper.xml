@@ -20,9 +20,7 @@
 
 	<select id="userLogin" resultType="UserVO">
 		SELECT * FROM MEMBER WHERE
-		id =
-		#{id}
-		AND pw = #{pw}
+		id = #{id} AND pw = #{pw}
 	</select>
 
 	<insert id="insertUser" parameterType="UserVO">

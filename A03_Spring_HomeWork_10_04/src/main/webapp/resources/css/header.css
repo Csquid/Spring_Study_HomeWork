@@ -94,3 +94,6 @@
 	background-image: url("/images/background-images/leader_1.jpg");
 	background-repeat: no-repeat;
 }
+.table-hover tbody tr:hover {
+	background-color: #A7FFEB;
+}

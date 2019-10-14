@@ -31,6 +31,9 @@ const r_object_overlap = {
 	r_name : r_name
 };
 
+/*
+ * 기본 셋팅을 중복인 true로 셋팅을 하고 시작함.
+ */
 const checkOverlapObject = {
 	id : true,
 	name : true
