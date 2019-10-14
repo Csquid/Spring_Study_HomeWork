@@ -10,6 +10,9 @@
 				<li><a href="/admin/user_table" style="color: black;">
 						<h2 style="color: white;">User Table</h2>
 				</a></li>
+				<li><a href="/admin/user_table/role" style="color: black;">
+						<h2 style="color: white;">User Table Role</h2>
+				</a></li>
 			</ul>
 		</div>
 		<div class="col-lg-9">

@@ -28,6 +28,9 @@
 <c:if test="${page == 'admin_table'}">
 	<%@include file='floatSection/adminPage/adminPageUserTable.jsp'%>
 </c:if>
+<c:if test="${page == 'admin_table_role'}">
+	<%@include file='floatSection/adminPage/adminPageUserTableRole.jsp'%>
+</c:if>
 
 <%@ include file="fixSection/modal.jsp"%>
 <%@ include file="fixSection/footer.jsp"%>

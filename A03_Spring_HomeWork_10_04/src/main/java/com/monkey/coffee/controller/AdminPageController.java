@@ -67,7 +67,29 @@ public class AdminPageController {
 			return "./index";
 		}
 	}
-	
+	@RequestMapping(value = "/user_table/role", method = RequestMethod.GET)
+	public String user_table_role(Model model, HttpServletRequest request) {
+		logger.info("AdminPageController /admin/table");
+		
+		HttpSession session = request.getSession();
+		ArrayList<UserVO> getObject;
+		
+		//TODO: db 연동하여 유저 테이블 불러오기.
+		if(this.checkSessionUserRole(session) == true) {
+			getObject = service.searchUsersService();
+			
+			logger.info("getObject: " + getObject);
+			
+			model.addAttribute("page", "admin_table_role");
+			model.addAttribute("userInfoTable", getObject);
+			
+			return "./index";
+		} else {
+			model.addAttribute("page", "home");
+			model.addAttribute("error", "권한이 없습니다.");
+			return "./index";
+		}
+	}
 	private boolean checkSessionUserRole(HttpSession nSession) {
 		/*
 		logger.info("AdminPageController checkSessionUserRole Function");
