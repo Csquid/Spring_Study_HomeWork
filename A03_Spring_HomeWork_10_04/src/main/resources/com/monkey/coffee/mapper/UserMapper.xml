@@ -21,7 +21,7 @@
 	
 	<select id="searchUserRoleEquals" resultType="UserVO">
 		SELECT * FROM MEMBER WHERE
-		role = #{role}
+		role = #{keyword}
 	</select>
 	
 	<select id="userLogin" resultType="UserVO">

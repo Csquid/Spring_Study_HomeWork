@@ -1,7 +1,6 @@
 package com.monkey.coffee.controller;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,11 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.monkey.coffee.service.UserService;
 import com.monkey.coffee.vo.UserVO;
@@ -58,67 +55,32 @@ public class AdminPageController {
 	}
 
 	@RequestMapping(value = "/user_table/search", method = RequestMethod.GET)
-	public String user_table_search(Model model, HttpServletRequest request) {
+	public String user_table_search(Model model, HttpServletRequest request,
+			@RequestParam(defaultValue="") String keyword) {
 		logger.info("AdminPageController /admin/user_table/search");
 		
-		/*
-		 * HttpSession session = request.getSession();
-		 * 
-		 * ArrayList<UserVO> getObject;
-		 * 
-		 * getObject = service.searchUsersService();
-		 */
+		
+		ArrayList<UserVO> getObject = null;
 
-		// logger.info("getObject: " + getObject);
+		logger.info("keyword: " + keyword);
+		
+		if(keyword.equals("") || keyword.equals("all")) {		// 받아온 keyword 값이 비어있거나 all인경우 전부 출력한다.
+			getObject = service.searchUsersService();
+		} else {												// 아닌 경우
+			getObject = service.searchUserRoleEquals(keyword);
+			
+			if(getObject.size() == 0) {
+				logger.info("getObject size is zero");
+				getObject = null;
+			} else {
+				logger.info("getObject size isn't zero");
+			}
+		}
 
 		model.addAttribute("page", "admin_user_table_search");
-		// model.addAttribute("userInfoTable", getObject);
+		model.addAttribute("userInfoTable", getObject);
+		
 		return "./index";
 
-		// return "redirect:/admin/user_table/search/role/" + vo.getRole();
-
 	}
-
-	@RequestMapping(value = "/user_table/search/role", method = RequestMethod.POST)
-	public String user_table_search_role(Model model, @RequestBody Map<String, String> vo, HttpServletRequest request) {
-		logger.info("UserLoginController /user_table/search/role");
-		logger.info("Data: " + vo);
-		/*
-		 * ArrayList<UserVO> getObject;
-		 * 
-		 * getObject = service.searchUserRoleEquals(vo); HttpSession session =
-		 * request.getSession(); JSONObject jsonObject = new JSONObject();
-		 * 
-		 * if (getObject != null) { jsonObject.put("signal", "success");
-		 * jsonObject.put("userInfoTable", getObject);
-		 * model.addAttribute("userInfoTable", getObject); session.setAttribute("table",
-		 * true); } else { jsonObject.put("signal", "fail"); }
-		 * 
-		 * return jsonObject.toString();
-		 */
-		return "redirect:/admin/user_table/search/role/" + vo.get("role");
-	}
-	
-	/*
-	@ResponseBody
-	@RequestMapping(value = "/user_table/search/role", method = RequestMethod.POST)
-	public String user_table_search_role(Model model, @RequestBody UserVO vo, HttpServletRequest request) {
-		logger.info("UserLoginController /user_table/search/role");
-		vo.getRole();
-		/*
-		 * ArrayList<UserVO> getObject;
-		 * 
-		 * getObject = service.searchUserRoleEquals(vo); HttpSession session =
-		 * request.getSession(); JSONObject jsonObject = new JSONObject();
-		 * 
-		 * if (getObject != null) { jsonObject.put("signal", "success");
-		 * jsonObject.put("userInfoTable", getObject);
-		 * model.addAttribute("userInfoTable", getObject); session.setAttribute("table",
-		 * true); } else { jsonObject.put("signal", "fail"); }
-		 * 
-		 * return jsonObject.toString();
-		 
-		return "redirect:/admin/user_table/search/role/" + vo.getRole();
-	}
-	*/
 }

@@ -11,7 +11,7 @@
 					<h2>User Table</h2>
 			</a></li>
 			<li><a href="/admin/user_table/role" style="color: black;">
-					<h2>User Table Role</h2>
+					<h2>User Table Search</h2>
 			</a></li>
 		</ul>
 	</div>
@@ -22,25 +22,29 @@
 			</div>
 
 			<!-- TODO: role로 검색하여 테이블 뜨게 만들기. -->
-			<div class="input-group col-3"
-				style="margin-bottom: 30px; padding-left: 0px;">
-				<div class="input-group-prepend">
-					<label class="input-group-text">Role</label>
+			<form action="/admin/user_table/search" method="get">
+				<div class="input-group col-3"
+					style="margin-bottom: 30px; padding-left: 0px;">
+					<div class="input-group-prepend">
+						<label class="input-group-text">Role</label>
+					</div>
+					<select name="keyword" class="custom-select" id="admin-table-select-role">
+						<option value="all" selected>All</option>
+						<option value="iron">Iron</option>
+						<option value="bronze">Bronze</option>
+						<option value="sliver">Sliver</option>
+						<option value="gold">Gold</option>
+						<option value="platinum">Platinum</option>
+						<option value="diamond">Diamond</option>
+						<option value="staff">Staff</option>
+						<option value="admin">Admin</option>
+					</select>
+					<div class="input-group-append">
+						<button id="admin-table-search-role-button"
+							class="btn btn-outline-secondary" type="submit">Search</button>
+					</div>
 				</div>
-				<select class="custom-select" id="admin-table-select-role">
-					<option value="bronze">Bronze</option>
-					<option value="sliver">Sliver</option>
-					<option value="gold">Gold</option>
-					<option value="platinum">Platinum</option>
-					<option value="diamond">Diamond</option>
-					<option value="staff">Staff</option>
-					<option value="admin" selected>Admin</option>
-				</select>
-				<div class="input-group-append">
-					<button id="admin-table-search-role-button"
-						class="btn btn-outline-secondary" type="button">Search</button>
-				</div>
-			</div>
+			</form>
 
 			<table class="table table-bordered table-striped table-hover">
 				<thead>

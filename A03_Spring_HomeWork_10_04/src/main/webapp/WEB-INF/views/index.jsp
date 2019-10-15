@@ -29,7 +29,7 @@
 	<%@include file='floatSection/adminPage/adminPageUserTable.jsp'%>
 </c:if>
 <c:if test="${page == 'admin_user_table_search'}">
-	<%@include file='floatSection/adminPage/adminPageUserTableRole.jsp'%>
+	<%@include file='floatSection/adminPage/adminPageUserTableSearch.jsp'%>
 </c:if>
 
 <%@ include file="fixSection/modal.jsp"%>

@@ -24,8 +24,8 @@ public class UserService {
 	public UserVO searchUserNameService(UserVO vo) {
 		return mapper.searchUserName(vo);
 	}
-	public ArrayList<UserVO> searchUserRoleEquals(UserVO vo) {
-		return mapper.searchUserRoleEquals(vo);
+	public ArrayList<UserVO> searchUserRoleEquals(String keyword) {
+		return mapper.searchUserRoleEquals(keyword);
 	}
 	public UserVO userLoginService(UserVO vo) {
 		return mapper.userLogin(vo);

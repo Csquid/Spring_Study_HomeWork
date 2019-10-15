@@ -11,7 +11,7 @@
 					<h2>User Table</h2>
 			</a></li>
 			<li><a href="/admin/user_table/search" style="color: black;">
-					<h2>User Table Role</h2>
+					<h2>User Table Search</h2>
 			</a></li>
 		</ul>
 	</div>

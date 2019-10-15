@@ -14,7 +14,7 @@ public interface UserMapper {
 
 	public UserVO searchUserName(UserVO vo);
 
-	public ArrayList<UserVO> searchUserRoleEquals(UserVO vo);
+	public ArrayList<UserVO> searchUserRoleEquals(String keyword);
 
 	public UserVO userLogin(UserVO vo);
 
