@@ -79,6 +79,7 @@ public class AdminPageController {
 
 		model.addAttribute("page", "admin_user_table_search");
 		model.addAttribute("userInfoTable", getObject);
+		model.addAttribute("uri",request.getRequestURI());
 		
 		return "./index";
 

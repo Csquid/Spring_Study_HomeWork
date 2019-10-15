@@ -61,7 +61,9 @@
 					<%@include file='table.jsp'%>
 				</tbody>
 			</table>
-
+		<script type="text/javascript">
+			console.log("uri: " + ${uri});
+		</script>
 		</div>
 	</div>
 </div>
