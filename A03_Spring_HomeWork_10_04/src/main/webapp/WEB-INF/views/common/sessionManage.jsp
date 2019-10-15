@@ -27,4 +27,12 @@
 		}
 	}
  		
+	const nURI = "${uri}";
+    
+	console.log("uri_index: " + nURI.indexOf("/admin/user_table"));
+	
+    if (nURI.indexOf("admin/user_table") >= 0) {
+        $(".link-black").css("color", "black");
+    }
+    console.log("uri: " + "${uri}");
 </script>

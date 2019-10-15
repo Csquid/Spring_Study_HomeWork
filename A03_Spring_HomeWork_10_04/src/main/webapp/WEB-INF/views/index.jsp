@@ -7,7 +7,7 @@
 <%@ include file="fixSection/header.jsp"%>
 
 <c:if test="${page.indexOf('admin') < 0}">
-	<%@ include file="fixSection/usercard.jsp"%>
+	<%@include file="fixSection/usercard.jsp"%>
 </c:if>
 
 <c:if test="${page == 'home' || page == null}">
@@ -33,6 +33,9 @@
 </c:if>
 <c:if test="${page == 'admin_user_table_search'}">
 	<%@include file='floatSection/adminPage/adminPageUserTableSearch.jsp'%>
+</c:if>
+<c:if test="${page == 'admin_user_table_modify'}">
+	<%@include file='floatSection/adminPage/adminPageUserTableModify.jsp'%>
 </c:if>
 
 <%@ include file="fixSection/modal.jsp"%>

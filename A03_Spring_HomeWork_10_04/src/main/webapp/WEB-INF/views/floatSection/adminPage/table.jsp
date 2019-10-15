@@ -6,7 +6,8 @@
 <c:if test="${userInfoTable != null}">
 	<c:forEach var="i" begin="0" end="${userInfoTable.size() - 1}">
 		<tr>
-			<th scope="row">${userInfoTable[i].id}</th>
+			<th id="row">${userInfoTable[i].u_id}</th>
+			<th id="table-id">${userInfoTable[i].id}</th>
 			<td id="table-name">${userInfoTable[i].name}</td>
 			<td id="table-gender">${userInfoTable[i].gender}</td>
 			<td id="table-address">${userInfoTable[i].address}</td>

@@ -18,21 +18,34 @@
 		WHERE
 		name = #{name}
 	</select>
-	
+
 	<select id="searchUserRoleEquals" resultType="UserVO">
-		SELECT * FROM MEMBER WHERE
+		SELECT * FROM
+		MEMBER WHERE
 		role = #{keyword}
 	</select>
 	
-	<select id="userLogin" resultType="UserVO">
-		SELECT * FROM MEMBER WHERE
-		id =
-		#{id} AND pw = #{pw}
+	<!-- 
+		#{data} = 'abcd'
+		${data} = abcd
+		
+		#을 붙이면 자동으로 작은 따움표가 붙는다.
+		만약 문자열로 처리하면 안되는 부분은 큰 따움표를 붙여야함.
+	 -->
+	<select id="searchUserSort" resultType="UserVO">
+		SELECT * FROM MEMBER ORDER BY ${toSort} ${formatSort}
 	</select>
 
+	<select id="userLogin" resultType="UserVO">
+		SELECT * FROM MEMBER WHERE
+		id = #{id} AND pw = #{pw}
+	</select>
+
+	<!-- 만약 해당 컴퓨터에 시퀀스가 없다면 정해줘야하는데 꼬일것같으니 그냥 시퀀스 없이 돌리셈. -->
 	<insert id="insertUser" parameterType="UserVO">
-		INSERT INTO MEMBER(id, pw,
-		name, gender, address) VALUES(
+		INSERT INTO MEMBER(u_id,
+		id, pw, name, gender, address) VALUES(
+		seq.nextval,
 		#{id},
 		#{pw},
 		#{name},

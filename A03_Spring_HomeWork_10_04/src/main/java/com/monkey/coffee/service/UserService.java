@@ -1,6 +1,8 @@
 package com.monkey.coffee.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -24,8 +26,12 @@ public class UserService {
 	public UserVO searchUserNameService(UserVO vo) {
 		return mapper.searchUserName(vo);
 	}
-	public ArrayList<UserVO> searchUserRoleEquals(String keyword) {
+	public ArrayList<UserVO> searchUserRoleEqualsService(String keyword) {
 		return mapper.searchUserRoleEquals(keyword);
+	}
+	public ArrayList<UserVO> searchUserSortService(String toSort, String formatSort) {
+		
+		return mapper.searchUserSort(toSort, formatSort);
 	}
 	public UserVO userLoginService(UserVO vo) {
 		return mapper.userLogin(vo);

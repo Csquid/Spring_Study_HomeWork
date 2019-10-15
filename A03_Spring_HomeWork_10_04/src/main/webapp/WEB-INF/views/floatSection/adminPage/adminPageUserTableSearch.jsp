@@ -4,15 +4,14 @@
 <div class="content row" style="height: 100%;" style="">
 	<%@include file='side.jsp'%>
 	<div class="col-lg-10 row">
-		<div class="">
+		<div class="" style="min-width: 500px;">
 			<div style="margin-top: 30px; margin-bottom: 30px;">
 				<h3 style="display: inline">User Table</h3>
 			</div>
 
 			<!-- TODO: role로 검색하여 테이블 뜨게 만들기. -->
 			<form action="/admin/user_table/search" method="get">
-				<div class="input-group col-6"
-					style="margin-bottom: 30px; padding-left: 0px;">
+				<div class="input-group col-6" style="margin-bottom: 30px; padding-left: 0px;">
 					<div class="input-group-prepend">
 						<label class="input-group-text">Role</label>
 					</div>
@@ -62,6 +61,7 @@
 			<table class="table table-bordered table-striped table-hover">
 				<thead>
 					<tr>
+						<th>UID</th>
 						<th>ID</th>
 						<th>Name</th>
 						<th>Gender</th>
