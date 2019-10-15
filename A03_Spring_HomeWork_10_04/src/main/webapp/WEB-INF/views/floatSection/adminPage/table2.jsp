@@ -10,7 +10,14 @@
 			<td id="table-name">${userInfoTable[i].name}</td>
 			<td id="table-gender">${userInfoTable[i].gender}</td>
 			<td id="table-address">${userInfoTable[i].address}</td>
-			<td id="table-role">${userInfoTable[i].role}</td>
+			<!-- <td id="table-role">${userInfoTable[i].role}</td> -->
+			<td><select class="custom-select" id="table-role">
+					<option value="1" selected>admin</option>
+					<option value="2">staff</option>
+					<option value="2">silver</option>
+					<option value="3">bronze</option>
+					<option value="3">iron</option>
+			</select></td>
 			<td><button class="btn btn-outline-secondary" type="button"
 					id="check-overlap-id" style="width: 100%">Check</button></td>
 		</tr>

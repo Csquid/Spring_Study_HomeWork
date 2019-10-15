@@ -5,7 +5,7 @@
 <div id="monkey-user-card" class=""
 	style="float: right; display: none;">
 	<div class="card">
-		<img class="card-img-top" src="/images/admin_icon.png" width="100">
+		<!-- <img class="card-img-top" src="/images/admin_icon.png" width="100"> -->
 		<div class="card-block">
 			<h4 class="card-title" id="sessionID">ID:
 				${sessionScope.userInfo.id}</h4>

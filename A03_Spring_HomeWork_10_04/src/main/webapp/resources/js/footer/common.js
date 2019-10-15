@@ -4,6 +4,8 @@ $(function() {
 
       if (param.authority == "no") {
          window.alert("로그인후 이용이 가능하다니깐요 ㅎㅎ");
+      } else if(param.authority_admin == "no") {
+    	  window.alert("어드민만 접근이 가능합니다.");
       }
 
       function getParams() {

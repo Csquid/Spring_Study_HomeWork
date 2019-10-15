@@ -5,7 +5,10 @@
 <%@ include file="common/tools.jsp"%>
 <%@ include file="common/cssManage.jsp"%>
 <%@ include file="fixSection/header.jsp"%>
-<%@ include file="fixSection/usercard.jsp" %>
+
+<c:if test="${page.indexOf('admin') < 0}">
+	<%@ include file="fixSection/usercard.jsp"%>
+</c:if>
 
 <c:if test="${page == 'home' || page == null}">
 	<%@include file='floatSection/home.jsp'%>
