@@ -1,10 +1,14 @@
 package com.monkey.coffee.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -24,7 +28,15 @@ import net.sf.json.JSONObject;
 @RequestMapping(value = "/admin/**")
 public class AdminPageController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminPageController.class);
-
+	
+	//순서 있게 HashMap을 쓸려면 LinkedHashMap을 쓰면 된다.
+	/*
+	 * TODO: LinkedHashMap: 보통의 해쉬맵에서 순서순으로 집어넣는 배열의 장점과 해쉬맵의 장점을 썩은 유용한 라이브러리다
+	 * 		 HashMap 사용법 포스팅 하기 ♪
+	 * 		 HashMap과 LinkedHashMap 서로 차이점 포스팅 하기 ♪ 
+	 */
+	Map<String, String> userTableSortMap = new LinkedHashMap<String, String>();
+	
 	private UserService service;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -51,26 +63,25 @@ public class AdminPageController {
 		model.addAttribute("page", "admin_table");
 		model.addAttribute("userInfoTable", getObject);
 		model.addAttribute("uri", request.getRequestURI());
-		
+
 		return "./index";
 	}
 
 	@RequestMapping(value = "/user_table/search", method = RequestMethod.GET)
 	public String user_table_search(Model model, HttpServletRequest request,
-			@RequestParam(defaultValue="") String keyword) {
+			@RequestParam(defaultValue = "") String keyword) {
 		logger.info("AdminPageController /admin/user_table/search");
-		
-		
+
 		ArrayList<UserVO> getObject = null;
 
 		logger.info("keyword: " + keyword);
-		
-		if(keyword.equals("") || keyword.equals("all")) {		// 받아온 keyword 값이 비어있거나 all인경우 전부 출력한다.
+
+		if (keyword.equals("") || keyword.equals("all")) { // 받아온 keyword 값이 비어있거나 all인경우 전부 출력한다.
 			getObject = service.searchUsersService();
-		} else {												// 아닌 경우
+		} else { // 아닌 경우
 			getObject = service.searchUserRoleEqualsService(keyword);
-			
-			if(getObject.size() == 0) {
+
+			if (getObject.size() == 0) {
 				logger.info("getObject size is zero");
 				getObject = null;
 			} else {
@@ -81,30 +92,51 @@ public class AdminPageController {
 		model.addAttribute("page", "admin_user_table_search");
 		model.addAttribute("userInfoTable", getObject);
 		model.addAttribute("uri", request.getRequestURI());
-		
+
 		return "./index";
 
 	}
-	
+
 	@RequestMapping(value = "/user_table/modify", method = RequestMethod.GET)
-	public String user_table_modify(Model model, @RequestParam(defaultValue="u_id") String toSort, @RequestParam(defaultValue="desc") String formatSort, HttpServletRequest request) {
+	public String user_table_modify(Model model, @RequestParam(defaultValue = "u_id") String toSort,
+			HttpServletRequest request) {
 		logger.info("AdminPageController /admin/table/modify");
 
 		HttpSession session = request.getSession();
 		ArrayList<UserVO> getObject;
 
-		// TODO: db 연동하여 유저 테이블 불러오기.
-		getObject = service.searchUserSortService(toSort, formatSort);
+		String[] tableColumnData = { "u_id", "id", "name", "gender", "address", "role" };
 
+		for (int i = 0; i < tableColumnData.length; i++) {
+			// 만약 해쉬맵 키가 존재하지않다면 desc로 초기화 (init 작용)
+			// HashMap.containsKey(key) : key가 있는지 검색하며 return boolean
+			if (userTableSortMap.containsKey(tableColumnData[i]) == false) {
+				userTableSortMap.put(tableColumnData[i], "asc");
+			}
+		}
+
+		// TODO: db 연동하여 유저 테이블 불러오기.
+		getObject = service.searchUserSortService(toSort, userTableSortMap.get(toSort));
+
+		if (userTableSortMap.get(toSort).equals("asc")) {
+			userTableSortMap.put(toSort, "desc");
+		} else {
+			userTableSortMap.put(toSort, "asc");
+		}
+		
 		model.addAttribute("page", "admin_user_table_modify");
 		model.addAttribute("userInfoTable", getObject);
 		model.addAttribute("uri", request.getRequestURI());
+		model.addAttribute("tableColumnData", userTableSortMap);
 		model.addAttribute("img_sort_asc", "<img src=\"/images/sort_asc.svg\" class=\"monkey-image-sort\">");
 		model.addAttribute("img_sort_desc", "<img src=\"/images/sort_desc.svg\" class=\"monkey-image-sort\">");
-		
+
+		/*
+		 * uid id name gender address role
+		 * 
+		 */
 		logger.info("data: " + getObject);
-		
-		
+
 		return "./index";
 	}
 }

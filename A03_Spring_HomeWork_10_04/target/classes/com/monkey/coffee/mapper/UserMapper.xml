@@ -31,9 +31,11 @@
 		
 		#을 붙이면 자동으로 작은 따움표가 붙는다.
 		만약 문자열로 처리하면 안되는 부분은 큰 따움표를 붙여야함.
+		
+		LOWER: 다 소문자로 바꾸어 정렬해줌.
 	 -->
 	<select id="searchUserSort" resultType="UserVO">
-		SELECT * FROM MEMBER ORDER BY ${toSort} ${formatSort}
+		SELECT * FROM MEMBER ORDER BY LOWER(${toSort}) ${formatSort}
 	</select>
 
 	<select id="userLogin" resultType="UserVO">
