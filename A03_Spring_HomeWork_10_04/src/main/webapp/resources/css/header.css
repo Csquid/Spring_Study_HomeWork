@@ -97,3 +97,8 @@
 .table-hover tbody tr:hover {
 	background-color: #A7FFEB;
 }
+
+.monkey-image-sort {
+	width: 20px;
+	float: right;
+}

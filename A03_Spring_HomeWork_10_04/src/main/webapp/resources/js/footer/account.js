@@ -298,31 +298,11 @@ $(function() {
 		})
 	})
 	
-	$("#admin-table-search-role-button").click(function() {
-
-		// 데이터 받아오는 부분
-		const searchRoleData = JSON.stringify({
-			role: $("#admin-table-select-role").val()
-		});
-
-		// ajax 통신 시작
-		$.ajax({
-			type : "POST",
-			url : "/admin/user_table/search/role",
-			data : searchRoleData,
-			dataType : "json",
-			contentType : "application/json",
-			success : function(data) {
-				// 만약 성공했을때
-				if (data.signal == "success") {
-					console.log(data);
-				} else {
-					
-				}
-				
-			}
-		})
-	})
+	/*
+	 * 
+	 * 어드민 페이지 - 유저 테이블 ajax 처리 삭제
+	 * 
+	 */
 })
 
 function checkOverlapIdName(overlapObject) {

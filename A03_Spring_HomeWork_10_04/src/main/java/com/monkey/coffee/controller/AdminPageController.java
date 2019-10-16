@@ -98,6 +98,9 @@ public class AdminPageController {
 
 		model.addAttribute("page", "admin_user_table_modify");
 		model.addAttribute("userInfoTable", getObject);
+		model.addAttribute("uri", request.getRequestURI());
+		model.addAttribute("img_sort_asc", "<img src=\"/images/sort_asc.svg\" class=\"monkey-image-sort\">");
+		model.addAttribute("img_sort_desc", "<img src=\"/images/sort_desc.svg\" class=\"monkey-image-sort\">");
 		
 		logger.info("data: " + getObject);
 		

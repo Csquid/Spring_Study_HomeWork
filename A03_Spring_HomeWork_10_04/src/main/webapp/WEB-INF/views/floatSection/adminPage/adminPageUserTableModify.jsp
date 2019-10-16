@@ -8,17 +8,28 @@
 			<div style="margin-top: 30px; margin-bottom: 30px;">
 				<h3 style="display: inline">User Table</h3>
 			</div>
-
+			
+			<!--
+				만약 asc 버튼을 클릭하면 asc 버튼은 사라지고 desc 버튼이 나오고 
+				만약 desc 버튼을 클릭하면 desc 버튼은 사라지고 asc 버튼이 나온다.	
+			--> 
+							
 			<table class="table table-bordered table-striped table-hover">
 				<thead>
 					<tr>
-						<th>UID <img src="/images/icon-down.png" width="20px;"></th>
-						<th>ID <img src="/images/icon-down.png" width="20px;" style="float: right;"> </th>
-						<th>Name <c:if test="${sort.name == ASC}"> </c:if> </th>
-						<th>Gender</th>
-						<th>Address</th>
-						<th>Role</th>
-						<th>Modify</th>
+						<th> UID ${img_sort_asc} </th>
+						 
+						 <!-- asc -->
+						 <!-- <img src="/images/sort_asc.svg" class="monkey-image-sort"> -->
+						 <!-- desc -->
+						 <!-- <img src="/images/sort_desc.svg" class="monkey-image-sort"> -->
+						 
+						<th> ID      ${img_sort_desc} </th>
+						<th> Name    ${img_sort_desc}  <c:if test="${sort.name == ASC}"> </c:if> </th>
+						<th> Gender  ${img_sort_desc} </th>
+						<th> Address ${img_sort_desc} </th>
+						<th> Role    ${img_sort_desc} </th>
+						<th> Modify  ${img_sort_desc} </th>
 					</tr>
 				</thead>
 				<tbody>
@@ -28,7 +39,7 @@
 					<c:if test="${userInfoTable != null}">
 						<c:forEach var="i" begin="0" end="${userInfoTable.size() - 1}">
 							<tr>
-								<td id="row">${userInfoTable[i].u_id} </td>
+								<td id="row" style="text-align: center;">${userInfoTable[i].u_id} </td>
 								<td id="table-id">${userInfoTable[i].id}</td>
 								<td id="table-name">${userInfoTable[i].name}</td>
 								<td id="table-gender">${userInfoTable[i].gender}</td>

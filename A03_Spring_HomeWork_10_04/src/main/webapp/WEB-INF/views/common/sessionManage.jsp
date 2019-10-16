@@ -1,9 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<!--  -->
+
+
 <!-- Session Control -->
 <script>
 	var checkUserInfo = null;
 	let thisLiEliment;
+
 	if("${page}" != "") {
 		thisLiEliment = $("#" + "${page}");
 		thisLiEliment.addClass("active");
@@ -31,7 +35,7 @@
     
 	console.log("uri_index: " + nURI.indexOf("/admin/user_table"));
 	
-    if (nURI.indexOf("admin/user_table") >= 0) {
+    if (nURI.indexOf("/admin") >= 0) {
         $(".link-black").css("color", "black");
     }
     console.log("uri: " + "${uri}");
