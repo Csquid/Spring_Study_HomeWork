@@ -1,7 +1,19 @@
 $(function () {
+	
+    $('#searchType').change(function() {
+		location.href = "?searchType=" + this.value;
+	})
+	
     var param = getParams();
+    
+    if(param.searchType != undefined) {
+    	$('#searchType').val(param.searchType);
+    } else {
+    	$('#searchType').val('role');
+    }
+    
     console.log(param);
-
+    
     if (param.authority == "no") {
         window.alert("로그인후 이용이 가능하다니깐요 ㅎㅎ");
     } else if (param.authority_admin == "no") {
@@ -35,5 +47,6 @@ $(function () {
 
         return param;
     }
-
+    
+    
 })

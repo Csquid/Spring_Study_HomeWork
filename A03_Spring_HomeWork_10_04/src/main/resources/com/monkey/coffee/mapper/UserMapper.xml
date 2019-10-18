@@ -4,7 +4,7 @@
 
 <mapper namespace="com.monkey.coffee.mapper.UserMapper">
 
-	<select id="searchUsers" resultType="UserVO">
+	<select id="searchUsersAll" resultType="UserVO">
 		SELECT * FROM MEMBER
 	</select>
 
@@ -19,10 +19,10 @@
 		name = #{name}
 	</select>
 
-	<select id="searchUserRoleEquals" resultType="UserVO">
+	<select id="searchUser" resultType="UserVO">
 		SELECT * FROM
 		MEMBER WHERE
-		role = #{keyword}
+		LOWER(${searchType}) = #{keyword}
 	</select>
 	
 	<!-- 

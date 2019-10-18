@@ -36,8 +36,7 @@
 					<c:if test="${userInfoTable != null}">
 						<c:forEach var="i" begin="0" end="${userInfoTable.size() - 1}">
 							<tr>
-								<td id="row" style="text-align: center;">${userInfoTable[i].u_id} 
-								</td>
+								<td id="row" style="text-align: center;">${userInfoTable[i].u_id}</td>
 								<td id="table-id">${userInfoTable[i].id}</td>
 								<td id="table-name">${userInfoTable[i].name}</td>
 								<td id="table-gender">${userInfoTable[i].gender}</td>

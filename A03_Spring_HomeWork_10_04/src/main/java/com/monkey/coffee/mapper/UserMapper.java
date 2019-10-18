@@ -9,13 +9,13 @@ import com.monkey.coffee.vo.UserVO;
 
 @Mapper
 public interface UserMapper {
-	public ArrayList<UserVO> searchUsers();
+	public ArrayList<UserVO> searchUsersAll();
 
 	public UserVO searchUserID(UserVO vo);
 
 	public UserVO searchUserName(UserVO vo);
 
-	public ArrayList<UserVO> searchUserRoleEquals(String keyword);
+	public ArrayList<UserVO> searchUser(@Param("searchType") String searchType, @Param("keyword") String keyword);
 	
 	/*
 	 * 

@@ -17,8 +17,8 @@ public class UserService {
 	
 	private UserMapper mapper;
 	
-	public ArrayList<UserVO> searchUsersService() {
-		return mapper.searchUsers();
+	public ArrayList<UserVO> searchUsersAllService() {
+		return mapper.searchUsersAll();
 	}
 	public UserVO searchUserIDService(UserVO vo) {
 		return mapper.searchUserID(vo);
@@ -26,11 +26,10 @@ public class UserService {
 	public UserVO searchUserNameService(UserVO vo) {
 		return mapper.searchUserName(vo);
 	}
-	public ArrayList<UserVO> searchUserRoleEqualsService(String keyword) {
-		return mapper.searchUserRoleEquals(keyword);
+	public ArrayList<UserVO> searchUsersService(String searchType, String keyword) {
+		return mapper.searchUser(searchType, keyword);
 	}
 	public ArrayList<UserVO> searchUserSortService(String toSort, String formatSort) {
-		
 		return mapper.searchUserSort(toSort, formatSort);
 	}
 	public UserVO userLoginService(UserVO vo) {

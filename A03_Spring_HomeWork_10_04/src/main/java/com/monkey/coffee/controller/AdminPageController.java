@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.monkey.coffee.service.UserService;
 import com.monkey.coffee.vo.UserVO;
+import com.sun.org.apache.xpath.internal.compiler.Keywords;
 
 import lombok.AllArgsConstructor;
 import net.sf.json.JSONObject;
@@ -58,7 +59,7 @@ public class AdminPageController {
 		ArrayList<UserVO> getObject;
 
 		// TODO: db 연동하여 유저 테이블 불러오기.
-		getObject = service.searchUsersService();
+		getObject = service.searchUsersAllService();
 
 		model.addAttribute("page", "admin_table");
 		model.addAttribute("userInfoTable", getObject);
@@ -69,17 +70,26 @@ public class AdminPageController {
 
 	@RequestMapping(value = "/user_table/search", method = RequestMethod.GET)
 	public String user_table_search(Model model, HttpServletRequest request,
-			@RequestParam(defaultValue = "") String keyword) {
+			@RequestParam(defaultValue="role") String searchType,  @RequestParam(defaultValue = "all") String keyword) {
 		logger.info("AdminPageController /admin/user_table/search");
-
+		
 		ArrayList<UserVO> getObject = null;
-
+		
+		Map<String, String[]> mapKeyword = new LinkedHashMap<String, String[]>();
+		
+		mapKeyword.put("role", 
+				new String[] {"iron", "bronze", "silver", "gold", "platinum", "diamond", "staff", "admin"});
+		mapKeyword.put("gender",
+				new String[]  {"man", "woman"});
+		mapKeyword.put("address",
+				new String[] {"seoul", "busan", "daegu", "incheon", "gwangju", "daejeon", "ulsan"});
+		
 		logger.info("keyword: " + keyword);
 
 		if (keyword.equals("") || keyword.equals("all")) { // 받아온 keyword 값이 비어있거나 all인경우 전부 출력한다.
-			getObject = service.searchUsersService();
+			getObject = service.searchUsersAllService();
 		} else { // 아닌 경우
-			getObject = service.searchUserRoleEqualsService(keyword);
+			getObject = service.searchUsersService(searchType, keyword);
 
 			if (getObject.size() == 0) {
 				logger.info("getObject size is zero");
@@ -88,13 +98,29 @@ public class AdminPageController {
 				logger.info("getObject size isn't zero");
 			}
 		}
+		
+		String[] keywordStringArr = null;
+		
+		switch(searchType) {
+		case "role":
+			keywordStringArr = mapKeyword.get("role");
+			break;
+		case "gender":
+			keywordStringArr = mapKeyword.get("gender");
+			break;
+		case "address":
+			keywordStringArr = mapKeyword.get("address");
+			break;
+		default:
+			keywordStringArr = mapKeyword.get("role");
+				break;
+		}
 
+		model.addAttribute("keywords", keywordStringArr);
 		model.addAttribute("page", "admin_user_table_search");
 		model.addAttribute("userInfoTable", getObject);
 		model.addAttribute("uri", request.getRequestURI());
-
 		return "./index";
-
 	}
 
 	@RequestMapping(value = "/user_table/modify", method = RequestMethod.GET)
