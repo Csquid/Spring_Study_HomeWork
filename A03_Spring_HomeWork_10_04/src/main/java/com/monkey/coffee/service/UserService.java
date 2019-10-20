@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.monkey.coffee.controller.AdminPageController;
 import com.monkey.coffee.mapper.UserMapper;
 import com.monkey.coffee.vo.UserVO;
 
@@ -15,9 +18,11 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserService {
 	
+	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 	private UserMapper mapper;
 	
 	public ArrayList<UserVO> searchUsersAllService() {
+		logger.info("break2");
 		return mapper.searchUsersAll();
 	}
 	public UserVO searchUserIDService(UserVO vo) {
