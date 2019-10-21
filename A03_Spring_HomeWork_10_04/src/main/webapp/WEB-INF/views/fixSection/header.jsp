@@ -31,6 +31,7 @@
 					<a class="nav-item nav-link" id="sub1_Tab" href="/sub1_Tab">Sub1</a>
 					<a class="nav-item nav-link" id="sub2_Tab" href="/sub2_Tab">Sub2</a>
 					<a class="nav-item nav-link" id="sub3_Tab" href="/sub3_Tab">Sub3</a>
+					<a class="nav-item nav-link" id="board" href="/board">Board</a>
 					<a class="nav-item nav-link" id="parallax" href="/move/parallax">parallax</a>
 				</div>
 			</div>

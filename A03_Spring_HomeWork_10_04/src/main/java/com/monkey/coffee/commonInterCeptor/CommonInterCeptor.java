@@ -32,7 +32,11 @@ public class CommonInterCeptor extends HandlerInterceptorAdapter {
 				return false;
 			}
 		} else if (object == null) {
-			response.sendRedirect("/sub1_Tab/?authority=no");
+			if(request.getRequestURL().indexOf("/board") >= 0) {
+				response.sendRedirect("/board/?authority=no");
+			} else {
+				response.sendRedirect("/sub1_Tab/?authority=no");
+			}
 			return false;
 		} else {
 			return true;

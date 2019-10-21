@@ -62,8 +62,6 @@ public class AdminPageController {
 	public String home(Model model, HttpServletRequest request) {
 		logger.info("AdminPageController /admin/index");
 
-		HttpSession session = request.getSession();
-
 		model.addAttribute("page", "admin");
 
 		return "./index";

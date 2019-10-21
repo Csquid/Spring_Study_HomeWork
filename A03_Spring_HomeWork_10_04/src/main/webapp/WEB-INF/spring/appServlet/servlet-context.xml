@@ -33,6 +33,7 @@
 		<interceptor>
 			<mapping path="/move/**" />
 			<mapping path="/admin/**" />
+			<mapping path="/board/create" />
 			<!-- <exclude-mapping path="/login/**" /> <exclude-mapping path="/register/**" 
 				/> -->
 			<beans:bean id="commonInterceptor"

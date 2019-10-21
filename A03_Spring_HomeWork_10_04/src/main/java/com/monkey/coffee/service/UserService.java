@@ -22,7 +22,6 @@ public class UserService {
 	private UserMapper mapper;
 	
 	public ArrayList<UserVO> searchUsersAllService() {
-		logger.info("break2");
 		return mapper.searchUsersAll();
 	}
 	public UserVO searchUserIDService(UserVO vo) {
