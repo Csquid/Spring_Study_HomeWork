@@ -14,9 +14,13 @@ public interface BoardMapper {
 	//public List<BoardVO> getlistWithPagin(Criteria cri);
 	public List<BoardVO> getBoardList();
 
+	//단일 게시판 불러오기
+	public BoardVO getBoard(int idx);
+	
+	public int getSeqBoardLastNumber();
 	// 게시물 작성하기
 	public int insertBoard(BoardVO param);
-
+	
 	// 게시물 갯수 구하기
 	public int getTotalCount();
 

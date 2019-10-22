@@ -27,6 +27,8 @@ import net.sf.json.JSONObject;
 public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
+	private static final String defaultValue = null;
+
 	private BoardService service;
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
@@ -49,18 +51,20 @@ public class BoardController {
 		
 		return "./index";
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/create/db", method = RequestMethod.POST)
 	public String createBoardDB(Model model, @RequestBody BoardVO vo, HttpServletRequest request) {
 		JSONObject jsonObject = new JSONObject();
 		
 		logger.info("BoardController /board/create/db");
-		logger.info(vo.toString());
 		
 		int checkResult = service.insertBoard(vo);
+		int seqBoardNum = service.getSeqBoardLastNumberService();
 		
 		logger.info("checkResult: " + checkResult);
 		
+		jsonObject.put("seqNum", seqBoardNum);
 		//성공 했을시 checkResult는 양수를 반환
 		//실패 했을시 checkResult는 음수를 반환
 		if(checkResult > 0) {
@@ -68,15 +72,27 @@ public class BoardController {
 		} else {									
 			jsonObject.put("signal", "fail");
 		}
+
 		return jsonObject.toString();
 	}
 	
 	@RequestMapping(value="/view", method = RequestMethod.GET)
 	public String viewBoard(Model model, HttpServletRequest request, 
-			@RequestParam(defaultValue = "role") String searchType ) {
-		logger.info("BoardController /board/create");
+			@RequestParam(defaultValue = "0" ) int idx) {
+		JSONObject jsonObject = new JSONObject();
+		logger.info("BoardController /board/view");
+		
+		BoardVO getObject = service.getBoard(idx);
+		logger.info("getData: " + getObject);
+		
+		if(getObject == null) {
+			jsonObject.put("signal", "fail");
+		} else {
+			jsonObject.put("signal", "true");
+		}
 		
 		model.addAttribute("page", "board_view");
+		model.addAttribute("boardContent", getObject);
 		
 		return "./index";
 	}

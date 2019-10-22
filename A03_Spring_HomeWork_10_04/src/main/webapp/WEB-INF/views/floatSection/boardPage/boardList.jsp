@@ -18,7 +18,8 @@
 				<c:forEach var="i" begin="0" end="${boardTable.size() - 1}">
 					<tr>
 						<th scope="row">${boardTable[i].idx}</th>
-						<td>${boardTable[i].title}</td>
+						<td style="cursor:pointer;" onclick="location.href='/board/view?idx=${boardTable[i].idx}'">
+						${boardTable[i].title}</td>
 						<td>${boardTable[i].creation_userid}</td>
 						<td>${boardTable[i].recommend_count}</td>
 						<td>${boardTable[i].history_count}</td>

@@ -18,6 +18,13 @@ public class BoardService {
 		return mapper.getBoardList();
 	}
 	
+	public BoardVO getBoard(int idx) {
+		return mapper.getBoard(idx);
+	}
+	
+	public int getSeqBoardLastNumberService() {
+		return mapper.getSeqBoardLastNumber();
+	}
 	public int insertBoard(BoardVO param) {
 		return mapper.insertBoard(param);
 	}

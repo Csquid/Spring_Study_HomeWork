@@ -61,7 +61,7 @@
 				contentType: "application/json",
 				success: function(data) {
 					console.log(data);
-					location.href = "./board";
+					location.href = "/board/view?idx=" + ((data.seqNum) - 1);
 				}
 			});	
 		});
