@@ -43,6 +43,9 @@
 	<c:when test="${page == 'board_create'}">
 		<%@include file='floatSection/boardPage/boardCreate.jsp'%>
 	</c:when>
+	<c:when test="${page == 'board_modify'}">
+		<%@include file='floatSection/boardPage/boardModify.jsp'%>
+	</c:when>
 	<c:when test="${page == 'board_view'}">
 		<%@include file='floatSection/boardPage/boardView.jsp'%>
 	</c:when>

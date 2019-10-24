@@ -11,4 +11,5 @@ public class BoardVO {
 	private String creation_date;
 	private String creation_userid;
 	private int recommend_count;
+	private String update_last_date;
 }

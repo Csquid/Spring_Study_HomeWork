@@ -32,38 +32,16 @@
 					style="text-align: center; display: block; position: relative; margin-left: 25%; margin-right: 25%;">여기에
 					파일을 드랍하세요</p>
 			</div>
-			<button class="btn btn-outline-dark" id="board-submit"
+			<!-- board.js ajax call -->
+			<button class="btn btn-outline-dark" id="create-board-submit"
 				type="submit" value="register">등록</button>
-			<a href="/board"><button class="btn btn-outline-dark" style=""
-					type="submit" value="cancle">취소</button></a>
-
+			<!-- move page /board -->
+			<a href="/board"><button class="btn btn-outline-dark"
+					type="submit" value="cancle">취소</button>
+			</a>
 		</div>
 	</div>
-
 </div>
-
 <script>
-	$("#board-title").val()
-	
-	$(function() {
-		$("#board-submit").click(function() {
-			const boardFormData = JSON.stringify({
-				title: $("#board-title").val(),
-				contents: $("#board-textarea").val(),
-				creation_userid: '${sessionScope.userInfo.id}',
-			});
-			
-			$.ajax({
-				type: "POST",
-				url: "/board/create/db",
-				data: boardFormData,
-				dataType: "json",
-				contentType: "application/json",
-				success: function(data) {
-					console.log(data);
-					location.href = "/board/view?idx=" + ((data.seqNum) - 1);
-				}
-			});	
-		});
-	})
+
 </script>
