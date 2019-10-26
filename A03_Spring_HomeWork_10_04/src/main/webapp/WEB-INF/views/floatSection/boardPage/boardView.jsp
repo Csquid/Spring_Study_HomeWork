@@ -57,4 +57,6 @@
 		$("#haveCheck").css("display", "none");
 		$("#delViewForm").css("display", "none")
 	}
+	
+	console.log('${sessionScope.board_cnt}')
 </script>

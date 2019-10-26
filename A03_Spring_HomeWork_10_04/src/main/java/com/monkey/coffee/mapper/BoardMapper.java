@@ -23,6 +23,7 @@ public interface BoardMapper {
 	//게시물 작성하기
 	public int insertBoard(BoardVO param);
 	
+	public int updateBoardHistory(@Param("idx")int idx);
 	//게시물 업데이트
 	public int updateBoard(BoardVO param);
 	

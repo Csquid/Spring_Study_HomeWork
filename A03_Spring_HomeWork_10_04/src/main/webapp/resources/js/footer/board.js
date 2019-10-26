@@ -19,7 +19,7 @@ $(function() {
 			contentType : "application/json",
 			success : function(data) {
 				console.log(data);
-				location.href = "/board/view?idx=" + ((data.seqNum) - 1);
+				location.href = "/board/view?idx=" + (data.seqNum);
 			}
 		});
 	});

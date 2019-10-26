@@ -76,8 +76,7 @@ public class UserLoginController {
 		HttpSession session = request.getSession();
 		
 		//세션 삭제
-		session.invalidate();
-		
+		session.removeAttribute("userInfo");
 		return "./index";
 	}
 	

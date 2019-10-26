@@ -32,6 +32,12 @@
 		CONTENTS = #{contents},
 		UPDATE_LAST_DATE = SYSDATE WHERE IDX = #{idx}
 	</update>
+	<update id="updateBoardHistory" parameterType="int">
+		UPDATE BOARD SET
+		history_count = history_count + 1
+		WHERE IDX = #{idx}
+		
+	</update>
 	<delete id="deleteBoard" parameterType="int">
 		DELETE FROM BOARD WHERE 
 		IDX = #{idx}

@@ -39,7 +39,10 @@ public class BoardService {
 		return mapper.insertBoard(param);
 	}
 	
-	public int updateBoard(BoardVO param) {
+	public int updateBoardHistoryService(int idx) {
+		return mapper.updateBoardHistory(idx);
+	}
+	public int updateBoardService(BoardVO param) {
 		return mapper.updateBoard(param);
 	}
 	
