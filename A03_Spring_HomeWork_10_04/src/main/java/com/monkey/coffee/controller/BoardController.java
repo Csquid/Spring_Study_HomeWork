@@ -1,7 +1,6 @@
 package com.monkey.coffee.controller;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -119,11 +118,11 @@ public class BoardController {
 				boardUserSawList.add(userData.getId());
 
 				board_cnt.put(idx, boardUserSawList);
-				
+
 				service.updateBoardHistoryService(idx);
 			} else if (boardUserSawList.contains(userData.getId()) == false) { // 중복된 아이디가 없는경우
 				boardUserSawList.add(userData.getId());
-				
+
 				service.updateBoardHistoryService(idx);
 			}
 		}
@@ -260,10 +259,11 @@ public class BoardController {
 	@RequestMapping(value = "/session/delete/board_cnt", method = RequestMethod.GET)
 	public String deleteSessionBoardCnt(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		
+
 		session.removeAttribute("board_cnt");
 		return null;
 	}
+
 	// 게시글 idx를 이용하여 로그인한 유저의 세션 아이디와 대조하여 결과값을 boolean 값으로 리턴해준다.
 	private boolean searchMasterPost(HttpServletRequest request, int idx) {
 		HttpSession session = request.getSession();

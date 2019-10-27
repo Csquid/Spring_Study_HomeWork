@@ -23,8 +23,13 @@
 
 			<textarea class="col-12" id="board-textarea"
 				style="height: 500px; resize: none; border: solid #C1C1C1 1px; padding: 15px; margin-bottom: 10px;"></textarea>
-
-			<!-- 만약 파일이 업로드 되었을시 p태그는 사라지고 이미지가 나온다.-->
+				
+			<form method="post" action="upload" enctype="multipart/form-data">
+				<label>파일:</label> <input type="file" name="file1"><br><br>
+				<input type="submit" value="upload">
+			</form>
+			<!-- 
+			<!-- 만약 파일이 업로드 되었을시 p태그는 사라지고 이미지가 나온다.
 			<div class="col-12" id="drop"
 				style="border: solid #C1C1C1 1px; height: 200px; background-color: white; padding: 15px; margin-bottom: 10px;"
 				type="file">
@@ -32,16 +37,16 @@
 					style="text-align: center; display: block; position: relative; margin-left: 25%; margin-right: 25%;">여기에
 					파일을 드랍하세요</p>
 			</div>
+			 -->
 			<!-- board.js ajax call -->
 			<button class="btn btn-outline-dark" id="create-board-submit"
 				type="submit" value="register">등록</button>
 			<!-- move page /board -->
 			<a href="/board"><button class="btn btn-outline-dark"
-					type="submit" value="cancle">취소</button>
-			</a>
+					type="submit" value="cancle">취소</button> </a>
 		</div>
 	</div>
 </div>
 <script>
-
+	
 </script>
