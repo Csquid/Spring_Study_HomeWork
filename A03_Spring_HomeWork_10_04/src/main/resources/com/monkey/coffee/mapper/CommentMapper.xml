@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0 //EN"
+"http://mybatis.opg/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.monkey.coffee.mapper.CommentMapper">
+	<select id="getComment" resultType="CommentVO">
+		SELECT * FROM BOARD_COMMENT
+		WHERE BOARD_IDX = #{board_idx}
+	</select>
+	<insert id="insertComment" parameterType="CommentVO">
+		INSERT INTO BOARD_COMMENT(COMMENT_IDX, BOARD_IDX, CONTENT, WRITER)
+		VALUES (seq_comment.NEXTVAL, #{board_idx}, #{content}, #{writer})
+	</insert>
+</mapper>

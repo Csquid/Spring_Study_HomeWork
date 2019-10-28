@@ -37,15 +37,7 @@
 	
 	<mybatis-spring:scan
 		base-package="com.monkey.coffee.mapper" />
-	<!-- 
-	<mybatis-spring:scan
-		base-package="com.monkey.coffee.board.mapper" />
-	-->
 		
 	<context:component-scan
 		base-package="com.monkey.coffee.service" />
-	<!-- 
-	<context:component-scan
-		base-package="com.monkey.coffee.board.service" />
-	 -->
 </beans>

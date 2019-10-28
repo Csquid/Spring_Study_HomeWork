@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.monkey.coffee.service.BoardService;
+import com.monkey.coffee.service.CommentService;
 import com.monkey.coffee.vo.BoardVO;
+import com.monkey.coffee.vo.CommentVO;
 import com.monkey.coffee.vo.UserVO;
 
 import lombok.AllArgsConstructor;
@@ -35,6 +37,7 @@ public class BoardController {
 	private static final String defaultValue = null;
 
 	private BoardService service;
+	private CommentService cService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest request) {
@@ -56,6 +59,7 @@ public class BoardController {
 
 		if (userData != null) {
 			userHavePost = service.searchIDXs(userData.getId());
+			model.addAttribute("userInfo", userData);
 		}
 
 		model.addAttribute("page", "board");
@@ -81,6 +85,7 @@ public class BoardController {
 
 		logger.info("BoardController /board/create/db");
 
+		logger.info("vo: " + vo);
 		int checkResult = service.insertBoard(vo);
 		// 마지막 시퀀스 값을 반환 --> 마지막 시퀀스 값이기 때문에 마지막 게시물 번호 + 1이다.
 		int seqBoardNum = service.getSeqBoardLastNumberService() - 1;
@@ -89,6 +94,32 @@ public class BoardController {
 
 		jsonObject.put("seqNum", seqBoardNum);
 
+		// 성공 했을시 checkResult는 양수를 반환
+		// 실패 했을시 checkResult는 음수를 반환
+		if (checkResult > 0) {
+			jsonObject.put("signal", "success");
+		} else {
+			jsonObject.put("signal", "fail");
+		}
+
+		return jsonObject.toString();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/comment/create/db", method = RequestMethod.POST)
+	public String createBoardCommentDB(Model model, @RequestBody CommentVO vo, HttpServletRequest request) {
+		JSONObject jsonObject = new JSONObject();
+
+		logger.info("BoardController /board/create/db");
+		
+		logger.info("vo: " + vo);
+		int checkResult = cService.insertCommentService(vo);
+		// 마지막 시퀀스 값을 반환 --> 마지막 시퀀스 값이기 때문에 마지막 게시물 번호 + 1이다.
+
+		logger.info("checkResult: " + checkResult);
+		
+		jsonObject.put("seqNum", vo.getBoard_idx());
+		
 		// 성공 했을시 checkResult는 양수를 반환
 		// 실패 했을시 checkResult는 음수를 반환
 		if (checkResult > 0) {
@@ -110,7 +141,9 @@ public class BoardController {
 
 		Map<Integer, ArrayList<String>> board_cnt = (Map<Integer, ArrayList<String>>) session.getAttribute("board_cnt");
 		BoardVO getObject = service.getBoard(idx);
-
+		
+		List<CommentVO> getCommentObject = cService.getCommentService(idx);
+		
 		ArrayList<String> boardUserSawList = board_cnt.get(idx);
 		if (userData != null) {
 			if (boardUserSawList == null) { // 이 세션의 해당 idx arrayList가 없는경우.
@@ -133,7 +166,13 @@ public class BoardController {
 		} else {
 			model.addAttribute("haveUserBoard", "false");
 		}
-
+		
+		if(getCommentObject == null) {
+			model.addAttribute("comments", null);
+		} else {
+			model.addAttribute("comments", getCommentObject);
+		}
+		
 		model.addAttribute("page", "board_view");
 		model.addAttribute("boardContent", getObject);
 
@@ -170,7 +209,7 @@ public class BoardController {
 		int checkResult = -1;
 
 		// 게시물의 주인인지 확인 하는 단계
-		if (this.searchMasterPost(request, vo.getIdx())) {
+		if (this.searchMasterPost(request, vo.getBoard_idx())) {
 
 			// 만약 주인이라면 고칠수있게 해줌.
 			checkResult = service.updateBoardService(vo);
@@ -184,7 +223,7 @@ public class BoardController {
 			checkResult = -1;
 		}
 
-		jsonObject.put("seqNum", vo.getIdx());
+		jsonObject.put("seqNum", vo.getBoard_idx());
 
 		return jsonObject.toString();
 	}
@@ -230,10 +269,10 @@ public class BoardController {
 		int checkResult = -1;
 
 		// 게시물의 주인인지 확인 하는 단계
-		if (this.searchMasterPost(request, vo.getIdx())) {
+		if (this.searchMasterPost(request, vo.getBoard_idx())) {
 
 			// 만약 주인이라면 삭제할수있게 해줌.
-			checkResult = service.deleteBoard(vo.getIdx());
+			checkResult = service.deleteBoard(vo.getBoard_idx());
 
 			if (checkResult > 0) {
 				jsonObject.put("signal", "success");
@@ -251,7 +290,7 @@ public class BoardController {
 		}
 
 		model.addAttribute("page", "board");
-		jsonObject.put("seqNum", vo.getIdx());
+		jsonObject.put("seqNum", vo.getBoard_idx());
 
 		return jsonObject.toString();
 	}

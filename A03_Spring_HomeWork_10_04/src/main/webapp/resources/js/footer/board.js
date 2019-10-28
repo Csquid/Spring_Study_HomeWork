@@ -7,10 +7,12 @@ $(function() {
 	$("#create-board-submit").click(function() {
 		const boardFormData = JSON.stringify({
 			title : $("#board-title").val(),
-			contents : $("#board-textarea").val(),
-			creation_userid : getSessionUserID(),
+			content : $("#board-textarea").val(),
+			writer : getSessionUserID(),
 		});
 
+		console.log("boardFormData: " + boardFormData);
+		
 		$.ajax({
 			type : "POST",
 			url : "/board/create/db",
@@ -24,11 +26,31 @@ $(function() {
 		});
 	});
 	
+	$("#create-comment-submit").click(function() {
+		const commentFormData = JSON.stringify({
+			board_idx : $("#hiddenData")[0].innerText,
+			content : $("#comment-textarea").val(),
+			writer : getSessionUserID(),
+		});
+		
+		$.ajax({
+			type : "POST",
+			url : "/board/comment/create/db",
+			data : commentFormData,
+			dataType : "json",
+			contentType : "application/json",
+			success : function(data) {
+				console.log(data);
+				location.href = "/board/view?idx=" + (data.seqNum);
+			}
+		});
+	});
+	
 	$("#modify-board-submit").click(function() {
 		const boardFormData = JSON.stringify({
 			title : $("#board-title").val(),
-			contents : $("#board-textarea").val(),
-			creation_userid : getSessionUserID(),
+			content : $("#board-textarea").val(),
+			writer : getSessionUserID(),
 			idx: $("#board-idx").val()
 		});
 
@@ -53,8 +75,8 @@ $(function() {
 	
 	$("#delViewForm").click(function() {
 		const setData = JSON.stringify({
-			creation_userid : getSessionUserID(),
-			idx: $("#hiddenData")[0].innerText
+			writer : getSessionUserID(),
+			board_idx: $("#hiddenData")[0].innerText
 		});
 		
 		$.ajax({
@@ -83,8 +105,8 @@ $(function() {
 	//삭제버튼 누르면 해당 라인의 idx를 가져온뒤 post로 ajax 통신
 	delObjects.click(function(e) {
 		const setData = JSON.stringify({
-			creation_userid : getSessionUserID(),
-			idx: this.parentNode.lastChild.previousSibling.innerText
+			writer : getSessionUserID(),
+			board_idx: this.parentNode.lastChild.previousSibling.innerText
 		});
 		
 		$.ajax({

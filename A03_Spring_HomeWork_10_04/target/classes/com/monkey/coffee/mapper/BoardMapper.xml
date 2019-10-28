@@ -4,42 +4,47 @@
 
 <mapper namespace="com.monkey.coffee.mapper.BoardMapper">
 	<select id="getBoardList" resultType="BoardVO">
-		SELECT * FROM BOARD ORDER BY IDX DESC
+		SELECT * FROM BOARD ORDER BY BOARD_IDX DESC
 	</select>
 	<select id="getBoard" resultType="BoardVO">
 		SELECT * FROM BOARD WHERE
-		BOARD_IDX = #{idx}
+		BOARD_IDX = #{board_idx}
+	</select>
+	<select id="getComment" resultType="CommentVO">
+		SELECT * FROM BOARD_COMMENT 
+		WHERE BOARD_IDX = #{board_idx};
 	</select>
 	<select id="searchIDXs" resultType="int">
-		select idx from board where
-		creation_userid = #{creation_userid}
+		select BOARD_IDX from board where
+		writer = #{writer}
 	</select> 
 	<select id="searchEqualsUserAndBoard" resultType="BoardVO">
 		select * from board where 
-		creation_userid = #{creation_userid} and 
-		BOARD_IDX = #{idx}
+		writer = #{writer} and 
+		BOARD_IDX = #{board_idx}
 	</select>
 	<select id="getSeqBoardLastNumber" resultType="int">
 		select last_number from USER_SEQUENCES where SEQUENCE_NAME = upper('seq_board')
 	</select>
 	<insert id="insertBoard" parameterType="BoardVO"> 
-		INSERT INTO BOARD(BOARD_IDX, TITLE, CONTENTS, CREATION_USERID)
-		VALUES (seq_board.NEXTVAL, #{title}, #{contents}, #{creation_userid})
+		INSERT INTO BOARD(BOARD_IDX, TITLE, CONTENT, WRITER)
+		VALUES (seq_board.NEXTVAL, #{title}, #{content}, #{writer})
 	</insert>
+	
 	<update id="updateBoard" parameterType="BoardVO">
 		UPDATE BOARD SET
 		TITLE = #{title},
-		CONTENTS = #{contents},
-		UPDATE_LAST_DATE = SYSDATE WHERE IDX = #{idx}
+		content = #{content},
+		UPDATE_LAST_DATE = SYSDATE WHERE BOARD_IDX = #{board_idx}
 	</update>
 	<update id="updateBoardHistory" parameterType="int">
 		UPDATE BOARD SET
 		history_count = history_count + 1
-		WHERE IDX = #{idx}
+		WHERE BOARD_IDX = #{board_idx}
 		
 	</update>
 	<delete id="deleteBoard" parameterType="int">
 		DELETE FROM BOARD WHERE 
-		BOARD_IDX = #{idx}
+		BOARD_IDX = #{board_idx}
 	</delete>
 </mapper>

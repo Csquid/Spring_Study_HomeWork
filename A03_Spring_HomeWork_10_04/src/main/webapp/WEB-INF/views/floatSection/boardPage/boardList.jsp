@@ -15,22 +15,21 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:if test="${boardTable != null}">
+			<c:if test="${boardTable.size() != 0}">
 				<c:forEach var="i" begin="0" end="${boardTable.size() - 1}">
 					<tr>
-						<th scope="row">${boardTable[i].idx}</th>
+						<th scope="row">${boardTable[i].board_idx}</th>
 						<td style="cursor:pointer;" 
-						onclick="location.href='/board/view?idx=${boardTable[i].idx}'">
+						onclick="location.href='/board/view?idx=${boardTable[i].board_idx}'">
 						${boardTable[i].title}</td>
-						<td>${boardTable[i].creation_userid}</td>
+						<td>${boardTable[i].writer}</td>
 						<td style="text-align: center;">${boardTable[i].recommend_count}</td>
 						<td style="text-align: center;">${boardTable[i].history_count}</td>
 						<td>${boardTable[i].creation_date}</td>
 						<td style="text-align: center;">
-						<c:if test="${userHavePostArray.contains(boardTable[i].idx)}">
-							<!-- onclick="location.href='/board/delete?idx=${boardTable[i].idx} -->
+						<c:if test="${userHavePostArray.contains(boardTable[i].board_idx)}">
 							<span style="cursor:pointer;" class="delClass">X</span>
-							<p style="display: none;">${boardTable[i].idx}</p>
+							<p style="display: none;">${boardTable[i].board_idx}</p>
 						</c:if>
 						</td>
 					</tr>
