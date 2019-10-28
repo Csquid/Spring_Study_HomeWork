@@ -19,16 +19,16 @@ public class BoardService {
 		return mapper.getBoardList();
 	}
 	
-	public BoardVO getBoard(int idx) {
-		return mapper.getBoard(idx);
+	public BoardVO getBoard(int board_idx) {
+		return mapper.getBoard(board_idx);
 	}
 	
 	public List<Integer> searchIDXs(String userID) {
 		return mapper.searchIDXs(userID);
 	}
 	
-	public BoardVO searchEqualsUserAndBoardService(int idx, String userID) {
-		return mapper.searchEqualsUserAndBoard(idx, userID);
+	public BoardVO searchEqualsUserAndBoardService(int board_idx, String userID) {
+		return mapper.searchEqualsUserAndBoard(board_idx, userID);
 	}
 	
 	public int getSeqBoardLastNumberService() {
@@ -39,8 +39,8 @@ public class BoardService {
 		return mapper.insertBoard(param);
 	}
 	
-	public int updateBoardHistoryService(int idx) {
-		return mapper.updateBoardHistory(idx);
+	public int updateBoardHistoryService(int board_idx) {
+		return mapper.updateBoardHistory(board_idx);
 	}
 	public int updateBoardService(BoardVO param) {
 		return mapper.updateBoard(param);

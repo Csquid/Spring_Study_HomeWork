@@ -45,9 +45,9 @@
 
 	<!-- 만약 해당 컴퓨터에 시퀀스가 없다면 정해줘야하는데 꼬일것같으니 그냥 시퀀스 없이 돌리셈. -->
 	<insert id="insertUser" parameterType="UserVO">
-		INSERT INTO MEMBER(u_id,
+		INSERT INTO MEMBER(MEMBER_IDX,
 		id, pw, name, gender, address) VALUES(
-		seq.nextval,
+		seq_member.nextval,
 		#{id},
 		#{pw},
 		#{name},
