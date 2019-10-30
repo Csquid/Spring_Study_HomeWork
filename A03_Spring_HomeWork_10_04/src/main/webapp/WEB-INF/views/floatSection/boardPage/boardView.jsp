@@ -23,26 +23,40 @@
 				<textarea class="col-12" disabled id=""
 					style="height: 500px; resize: none; border: solid #C1C1C1 1px; padding: 15px; background-color: white;">${boardContent.content}</textarea>
 				<div style="margin-top: 10px;"></div>
-				
+
+				<!-- 유저 댓글들 -->
 				<c:if test="${comments.size() != 0}">
 					<c:forEach var="i" begin="0" end="${comments.size() -1}">
-					<div class="row" style="margin-right: 0px; margin-left: 0px; margin-bottom: 10px;">
-						<p class="col-1" style="display: inline; padding: 5px; text-align: center; margin-bottom: 0px;"></p>
-						<p class="col-11" style="display: inline-block; padding: 5px; margin-bottom: 0px; border: solid #C1C1C1 1px; background-color: whitesmoke; border-bottom: none;">┖ ${comments[i].writer}
-							<a href="#" class="badge badge-secondary" style="float: right; margin-right: 10px; font-size: 100%">x</a>
-							<a href="#" class="badge badge-secondary" style="float: right; margin-right: 10px; font-size: 100%">Modify</a>
-						</p>
-						<p class="col-1"></p>
-						<textarea class="col-11" disabled id="" style="height: 100%; resize: none; border: solid #C1C1C1 1px; padding: 15px; background-color: white;">${comments[i].content}</textarea>
-					</div>
+						<div class="row"
+							style="margin-right: 0px; margin-left: 0px; margin-bottom: 10px;">
+							<p class="col-1"
+								style="display: inline; padding: 5px; text-align: center; margin-bottom: 0px;"></p>
+							<p class="col-11"
+								style="display: inline-block; padding: 5px; margin-bottom: 0px; border: solid #C1C1C1 1px; background-color: whitesmoke; border-bottom: none;">
+								┖ ${comments[i].writer} <a href="#" class="badge badge-secondary" style="float: right; margin-right: 10px; font-size: 100%">삭제</a>
+
+								<c:if test="${userInfo != null}">
+									<c:if test="${comments[i].writer == userInfo.id}">
+										<a href="#" class="badge badge-secondary" style="float: right; margin-right: 10px; font-size: 100%" onclick="modify('${comments[i].comment_idx}_modify')">수정</a>
+									</c:if>
+								</c:if>
+							</p>
+							<p class="col-1"></p>
+							<textarea class="col-11" disabled id="${comments[i].comment_idx}_modify"
+								style="height: 100%; resize: none; border: solid #C1C1C1 1px; padding: 15px; background-color: white;">${comments[i].content}</textarea>
+						</div>
 					</c:forEach>
 				</c:if>
-				<p style="padding: 5px; margin-bottom: 0px; border: solid #C1C1C1 1px; background-color: whitesmoke; border-bottom: none;">댓글쓰기</p>
+
+				<!-- 로그인을 하면 댓글 달수있다. -->
+				<p
+					style="padding: 5px; margin-bottom: 0px; border: solid #C1C1C1 1px; background-color: whitesmoke; border-bottom: none;">댓글쓰기</p>
 				<textarea class="col-12" id="comment-textarea"
 					style="height: 150px; resize: none; border: solid #C1C1C1 1px; padding: 15px; background-color: white;"
 					${userInfo == null ? 'disabled placeholder="로그인이 필요합니다."' : null}></textarea>
-				<button class="btn btn-outline-dark" style="margin-top: 10px;" id="create-comment-submit"
-					type="submit" value="register" ${userInfo == null ? 'disabled' : null}>등록</button>
+				<button class="btn btn-outline-dark" style="margin-top: 10px;"
+					id="create-comment-submit" type="submit" value="register"
+					${userInfo == null ? 'disabled' : null}>등록</button>
 
 
 				<a href="/board/">
@@ -73,6 +87,10 @@
 		$("#haveCheck").css("display", "none");
 		$("#delViewForm").css("display", "none")
 	}
-
+	
+	function modify(e) {
+		$("#" + e).removeAttr("disabled");
+	}
+	
 	console.log('${sessionScope.board_cnt}')
 </script>

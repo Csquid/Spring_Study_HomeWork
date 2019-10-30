@@ -140,8 +140,11 @@ $(function() {
 
 					// 로그인 성공 즉시 유저 아이디 영역에 아이디 문자열 추가
 					$("#sessionID").append(data.id);
-					if (data.userInfo.role === 'admin')
+					if (data.userInfo.role === 'admin') {
 						$("#user-card-admin-page").css("display", "block");
+					}
+					
+					location.reload();
 				} else {
 
 					// TODO: 만약 input 폼안에 null 유효성 css style이 들어있다면, 지우는 처리를

@@ -11,4 +11,5 @@
 		INSERT INTO BOARD_COMMENT(COMMENT_IDX, BOARD_IDX, CONTENT, WRITER)
 		VALUES (seq_comment.NEXTVAL, #{board_idx}, #{content}, #{writer})
 	</insert>
+	
 </mapper>

@@ -294,7 +294,40 @@ public class BoardController {
 
 		return jsonObject.toString();
 	}
+	
+	@RequestMapping(value = "/comment/modify", method = RequestMethod.GET)
+	public String modifyComment(Model model, HttpServletRequest request, @RequestParam(defaultValue = "0") int idx) {
+		JSONObject jsonObject = new JSONObject();
+		logger.info("BoardController /comment/modify");
+		int checkResult = -1;
 
+		// 게시물의 주인인지 확인 하는 단계
+		if (this.searchMasterPost(request, idx)) {
+
+			// 만약 주인이라면 고칠수있게 해줌.
+			checkResult = service.deleteBoard(idx);
+
+			if (checkResult > 0) {
+				jsonObject.put("signal", "success");
+			} else {
+				jsonObject.put("signal", "fail");
+			}
+			logger.info("checkResult is true");
+
+		} else {
+			// 만약 주인이 아니라면 실패.
+			model.addAttribute("haveUserBoard", "false");
+			jsonObject.put("signal", "fail");
+			jsonObject.put("detail", "permission");
+			logger.info("checkResult is false");
+		}
+
+		model.addAttribute("page", "board");
+		jsonObject.put("seqNum", idx);
+
+		return "./index";
+	}
+	
 	@RequestMapping(value = "/session/delete/board_cnt", method = RequestMethod.GET)
 	public String deleteSessionBoardCnt(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
