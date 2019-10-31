@@ -51,7 +51,7 @@ $(function() {
 			title : $("#board-title").val(),
 			content : $("#board-textarea").val(),
 			writer : getSessionUserID(),
-			idx: $("#board-idx").val()
+			board_idx: $("#board-idx").val()
 		});
 
 		$.ajax({

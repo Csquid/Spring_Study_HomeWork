@@ -204,7 +204,6 @@ $(function() {
 					if(data.overlap) {		//데이터가 중복된 경우
 						if(data.overlap_id) {
 							//회원가입 인 경우 무조건 block 처리
-							console.log("break");
 							$("#register-alert-overlap-id").css("display", "block");
 						} else {
 							$("#register-alert-overlap-id").css("display", "none");

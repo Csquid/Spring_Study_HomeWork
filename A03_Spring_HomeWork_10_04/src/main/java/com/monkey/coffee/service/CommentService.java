@@ -21,4 +21,12 @@ public class CommentService {
 	public int insertCommentService(CommentVO param) {
 		return mapper.insertComment(param);
 	}
+	
+	public int updateCommentService(CommentVO param) {
+		return mapper.updateComment(param);
+	}
+	
+	public int deleteCommentService(int param) {
+		return mapper.deleteComment(param);
+	}
 }

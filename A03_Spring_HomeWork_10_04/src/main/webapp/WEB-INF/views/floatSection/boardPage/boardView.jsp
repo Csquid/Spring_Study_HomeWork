@@ -33,21 +33,43 @@
 								style="display: inline; padding: 5px; text-align: center; margin-bottom: 0px;"></p>
 							<p class="col-11"
 								style="display: inline-block; padding: 5px; margin-bottom: 0px; border: solid #C1C1C1 1px; background-color: whitesmoke; border-bottom: none;">
-								┖ ${comments[i].writer} <a href="#" class="badge badge-secondary" style="float: right; margin-right: 10px; font-size: 100%">삭제</a>
-
+								┖ ${comments[i].writer}
+								<!-- 본인 아니면 나오지가 않음. -->
 								<c:if test="${userInfo != null}">
 									<c:if test="${comments[i].writer == userInfo.id}">
-										<a href="#" class="badge badge-secondary" style="float: right; margin-right: 10px; font-size: 100%" onclick="modify('${comments[i].comment_idx}_modify')">수정</a>
+										<a href="#" class="badge badge-secondary" style="float: right; margin-right: 10px; font-size: 100%"
+										onclick="deleteComment('${comments[i].comment_idx}', '${comments[i].writer}')">삭제</a>
+										<a href="#" id="${comments[i].comment_idx}_modify_button"
+											class="badge badge-secondary"
+											style="float: right; margin-right: 10px; font-size: 100%"
+											onclick="modify('${comments[i].comment_idx}_modify')">수정</a>
 									</c:if>
 								</c:if>
 							</p>
 							<p class="col-1"></p>
-							<textarea class="col-11" disabled id="${comments[i].comment_idx}_modify"
+							<!-- 만약 본인이며, 수정버튼을 누르면 커서가 안을 가리키며 수정을 할수있고 완료 버튼이 나온다. -->
+							<textarea class="col-11" disabled
+								id="${comments[i].comment_idx}_modify"
 								style="height: 100%; resize: none; border: solid #C1C1C1 1px; padding: 15px; background-color: white;">${comments[i].content}</textarea>
+							<p class="col-1"
+								style="display: inline; padding: 5px; text-align: center; margin-bottom: 0px;"></p>
+							<!-- 완료 버튼, 본인이 아니면 수정 요청 자체가 불가능. -->
+							<div style="display: none; padding: 0px;" class="col-11"
+								id="${comments[i].comment_idx}_modify_submit_form">
+								<p class="col-12"
+									style="display: inline-block; padding: 5px; margin-bottom: 0px; border: solid #C1C1C1 1px; background-color: whitesmoke; border-top: none;">
+									<a href="#"
+										onclick="modifyComment(${comments[i].comment_idx}, '${comments[i].writer}', $('#' + '${comments[i].comment_idx}_modify'))"
+										class="badge badge-secondary"
+										style="float: left; margin-right: 10px; font-size: 100%">완료</a>
+									<a href="#" class="badge badge-secondary" style="font-size: 100%;" onclick="location.href = '/board/view?idx=${boardContent.board_idx}'">취소</a>
+								</p>
+							</div>
+
 						</div>
 					</c:forEach>
 				</c:if>
-
+					<!-- history.back(); -->
 				<!-- 로그인을 하면 댓글 달수있다. -->
 				<p
 					style="padding: 5px; margin-bottom: 0px; border: solid #C1C1C1 1px; background-color: whitesmoke; border-bottom: none;">댓글쓰기</p>
@@ -87,9 +109,75 @@
 		$("#haveCheck").css("display", "none");
 		$("#delViewForm").css("display", "none")
 	}
-	
+
+	(function($) {
+		$.fn.setCursorToTextEnd = function() {
+			$initialVal = this.val();
+			this.val($initialVal + ' ');
+			this.val($initialVal);
+		};
+	})(jQuery);
+
 	function modify(e) {
 		$("#" + e).removeAttr("disabled");
+		$("#" + e).focus();
+		$("#" + e).setCursorToTextEnd();
+		$("#" + e + "_submit_form").css("display", "inline");
+		$("#" + e + "_button").css("display", "none");
+	}
+	
+	function modifyComment(idx, getWriter, getContent) {
+		console.log("idx: " + idx + ", writer: " + getWriter, ", content: " + getContent.val());
+		if(getWriter == '${userInfo.id}') {
+			const setData = JSON.stringify({
+				writer : getWriter,
+				content: getContent.val(),
+				comment_idx: idx,
+				board_idx: '${boardContent.board_idx}'
+			});
+			$.ajax({
+				type: "POST",
+				url: "/board/commnet/modify/db",
+				data: setData,
+				dataType: "json",
+				contentType : "application/json",
+				success: function(data) {
+					
+					if(data.signal == "success") {
+						location.href = "/board/view?idx=" + (data.seqNum);
+					} else if(data.signal == "fail") {
+						alert("업데이트에 실패했습니다.");
+					}
+				}
+			});
+		}	
+	}
+	
+	function deleteComment(idx, getWrite) {
+		console.log("[deleteComment] idx: " + idx + ", writer: " + getWrite);
+		
+		//세션을 이용하여 주인 인지 확인
+		if(getWrite == '${userInfo.id}') {
+			const setData = JSON.stringify({
+				comment_idx: idx,
+				board_idx: '${boardContent.board_idx}'
+			});
+			
+			$.ajax({
+				type: "POST",
+				url: "/board/comment/delete/db",
+				data: setData,
+				dataType: "json",
+				contentType : "application/json",
+				success: function(data) {
+					if(data.signal == "success") {
+						location.href = "/board/view?idx=" + (data.seqNum);
+					} else if(data.signal == "fail") {
+						alert("삭제에 실패했습니다.");
+					}
+				}
+			})
+		}
 	}
 	
 	console.log('${sessionScope.board_cnt}')

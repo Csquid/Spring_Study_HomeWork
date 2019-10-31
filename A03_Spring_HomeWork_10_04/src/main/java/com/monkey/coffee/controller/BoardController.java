@@ -227,6 +227,24 @@ public class BoardController {
 
 		return jsonObject.toString();
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/commnet/modify/db", method = RequestMethod.POST)
+	public String modifyCommnetDB(Model model, HttpServletRequest request, @RequestBody CommentVO vo) {
+		JSONObject jsonObject = new JSONObject();
+		logger.info("BoardController /board/comment/modify/db");
+		logger.info("board test: " + vo);
+		
+		if(cService.updateCommentService(vo) > 0) {
+			jsonObject.put("signal", "success");
+		} else {
+			jsonObject.put("signal", "fail");
+		}
+		
+		jsonObject.put("seqNum", vo.getBoard_idx());
+
+		return jsonObject.toString();
+	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deleteBoard(Model model, HttpServletRequest request, @RequestParam(defaultValue = "0") int idx) {
@@ -295,37 +313,22 @@ public class BoardController {
 		return jsonObject.toString();
 	}
 	
-	@RequestMapping(value = "/comment/modify", method = RequestMethod.GET)
-	public String modifyComment(Model model, HttpServletRequest request, @RequestParam(defaultValue = "0") int idx) {
+	@ResponseBody
+	@RequestMapping(value = "/comment/delete/db", method = RequestMethod.POST)
+	public String deleteCommentDB(Model model, HttpServletRequest request, @RequestBody CommentVO vo) {
 		JSONObject jsonObject = new JSONObject();
-		logger.info("BoardController /comment/modify");
-		int checkResult = -1;
-
-		// 게시물의 주인인지 확인 하는 단계
-		if (this.searchMasterPost(request, idx)) {
-
-			// 만약 주인이라면 고칠수있게 해줌.
-			checkResult = service.deleteBoard(idx);
-
-			if (checkResult > 0) {
-				jsonObject.put("signal", "success");
-			} else {
-				jsonObject.put("signal", "fail");
-			}
-			logger.info("checkResult is true");
-
+		logger.info("BoardController /board/comment/modify/db");
+		logger.info("board test: " + vo);
+		
+		if(cService.deleteCommentService(vo.getComment_idx()) > 0) {
+			jsonObject.put("signal", "success");
 		} else {
-			// 만약 주인이 아니라면 실패.
-			model.addAttribute("haveUserBoard", "false");
 			jsonObject.put("signal", "fail");
-			jsonObject.put("detail", "permission");
-			logger.info("checkResult is false");
 		}
+		
+		jsonObject.put("seqNum", vo.getBoard_idx());
 
-		model.addAttribute("page", "board");
-		jsonObject.put("seqNum", idx);
-
-		return "./index";
+		return jsonObject.toString();
 	}
 	
 	@RequestMapping(value = "/session/delete/board_cnt", method = RequestMethod.GET)

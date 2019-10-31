@@ -34,7 +34,7 @@
 	<update id="updateBoard" parameterType="BoardVO">
 		UPDATE BOARD SET
 		TITLE = #{title},
-		content = #{content},
+		CONTENT = #{content},
 		UPDATE_LAST_DATE = SYSDATE WHERE BOARD_IDX = #{board_idx}
 	</update>
 	<update id="updateBoardHistory" parameterType="int">

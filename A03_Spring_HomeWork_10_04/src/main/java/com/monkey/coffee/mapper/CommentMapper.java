@@ -11,4 +11,6 @@ import com.monkey.coffee.vo.CommentVO;
 public interface CommentMapper {
 	public List<CommentVO> getComment(@Param("board_idx")int board_idx);
 	public int insertComment(CommentVO param);
+	public int updateComment(CommentVO param);
+	public int deleteComment(@Param("comment_idx")int board_idx);
 }

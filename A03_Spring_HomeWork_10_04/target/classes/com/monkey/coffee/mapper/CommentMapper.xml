@@ -11,5 +11,12 @@
 		INSERT INTO BOARD_COMMENT(COMMENT_IDX, BOARD_IDX, CONTENT, WRITER)
 		VALUES (seq_comment.NEXTVAL, #{board_idx}, #{content}, #{writer})
 	</insert>
-	
+	<update id="updateComment" parameterType="CommentVO">
+		UPDATE BOARD_COMMENT SET 
+		CONTENT = #{content} WHERE COMMENT_IDX = #{comment_idx}
+	</update>
+	<delete id="deleteComment" parameterType="int">
+		DELETE FROM BOARD_COMMENT WHERE
+		COMMENT_IDX = #{comment_idx}
+	</delete>
 </mapper>
