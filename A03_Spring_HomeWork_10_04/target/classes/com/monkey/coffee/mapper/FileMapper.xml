@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0 //EN"
+"http://mybatis.opg/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.monkey.coffee.mapper.FileMapper">
+	<!-- 파일 업로드하기 -->
+	<insert id="insertFile" parameterType="BoardFileVO">
+
+		INSERT INTO
+		board_file(file_idx, board_idx, file_name_original, file_name_stored, file_path, file_size)
+		VALUES(seq_file.NEXTVAL, #{board_idx}, #{file_name_original}, #{file_name_stored}, 
+		#{file_path}, #{file_size})
+
+	</insert>
+	<select id="getFiles" resultType="BoardFileVO">
+		SELECT * FROM BOARD_FILE
+		WHERE BOARD_IDX = #{board_idx}
+	</select>
+</mapper>

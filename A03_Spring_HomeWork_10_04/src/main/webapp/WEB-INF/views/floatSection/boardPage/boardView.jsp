@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<style>
+.monkey-file {
+	margin-bottom: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+</style>
 <div class="content"
 	style="width: 100%; padding: 50px; background-color: white;">
 	<div class="col-12" style="background-color: whitesmoke;">
@@ -23,6 +30,17 @@
 				<textarea class="col-12" disabled id=""
 					style="height: 500px; resize: none; border: solid #C1C1C1 1px; padding: 15px; background-color: white;">${boardContent.content}</textarea>
 				<div style="margin-top: 10px;"></div>
+				<c:if test="${files.size() != 0}">
+					<div class="col-12 row"
+						style="margin-bottom: 10px; margin-left: 0px; margin-right: 0px; height: auto; border: solid #C1C1C1 1px; padding-top: 10px; background-color: white;">
+
+						<c:forEach var="i" begin="0" end="${files.size() - 1}">
+							<img class="col-2 monkey-file"
+								src="/resources/${files[i].file_path}" width="100%"
+								height="250px">
+						</c:forEach>
+					</div>
+				</c:if>
 
 				<!-- 유저 댓글들 -->
 				<c:if test="${comments.size() != 0}">
@@ -37,8 +55,9 @@
 								<!-- 본인 아니면 나오지가 않음. -->
 								<c:if test="${userInfo != null}">
 									<c:if test="${comments[i].writer == userInfo.id}">
-										<a href="#" class="badge badge-secondary" style="float: right; margin-right: 10px; font-size: 100%"
-										onclick="deleteComment('${comments[i].comment_idx}', '${comments[i].writer}')">삭제</a>
+										<a href="#" class="badge badge-secondary"
+											style="float: right; margin-right: 10px; font-size: 100%"
+											onclick="deleteComment('${comments[i].comment_idx}', '${comments[i].writer}')">삭제</a>
 										<a href="#" id="${comments[i].comment_idx}_modify_button"
 											class="badge badge-secondary"
 											style="float: right; margin-right: 10px; font-size: 100%"
@@ -51,25 +70,25 @@
 							<textarea class="col-11" disabled
 								id="${comments[i].comment_idx}_modify"
 								style="height: 100%; resize: none; border: solid #C1C1C1 1px; padding: 15px; background-color: white;">${comments[i].content}</textarea>
-							<p class="col-1"
-								style="display: inline; padding: 5px; text-align: center; margin-bottom: 0px;"></p>
+							<p class="col-1" style="display: inline; padding: 5px; text-align: center; margin-bottom: 0px;"></p>
 							<!-- 완료 버튼, 본인이 아니면 수정 요청 자체가 불가능. -->
-							<div style="display: none; padding: 0px;" class="col-11"
-								id="${comments[i].comment_idx}_modify_submit_form">
+							<div style="display: none; padding: 0px;" class="col-11" id="${comments[i].comment_idx}_modify_submit_form">
 								<p class="col-12"
 									style="display: inline-block; padding: 5px; margin-bottom: 0px; border: solid #C1C1C1 1px; background-color: whitesmoke; border-top: none;">
 									<a href="#"
 										onclick="modifyComment(${comments[i].comment_idx}, '${comments[i].writer}', $('#' + '${comments[i].comment_idx}_modify'))"
 										class="badge badge-secondary"
 										style="float: left; margin-right: 10px; font-size: 100%">완료</a>
-									<a href="#" class="badge badge-secondary" style="font-size: 100%;" onclick="location.href = '/board/view?idx=${boardContent.board_idx}'">취소</a>
+									<a href="#" class="badge badge-secondary"
+										style="font-size: 100%;"
+										onclick="location.href = '/board/view?idx=${boardContent.board_idx}'">취소</a>
 								</p>
 							</div>
 
 						</div>
 					</c:forEach>
 				</c:if>
-					<!-- history.back(); -->
+				<!-- history.back(); -->
 				<!-- 로그인을 하면 댓글 달수있다. -->
 				<p
 					style="padding: 5px; margin-bottom: 0px; border: solid #C1C1C1 1px; background-color: whitesmoke; border-bottom: none;">댓글쓰기</p>

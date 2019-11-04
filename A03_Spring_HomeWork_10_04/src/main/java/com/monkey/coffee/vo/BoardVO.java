@@ -1,5 +1,7 @@
 package com.monkey.coffee.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data	
@@ -12,4 +14,6 @@ public class BoardVO {
 	private String writer;
 	private int recommend_count;
 	private String update_last_date;
+	
+	private List<BoardFileVO> boardFileVO;
 }

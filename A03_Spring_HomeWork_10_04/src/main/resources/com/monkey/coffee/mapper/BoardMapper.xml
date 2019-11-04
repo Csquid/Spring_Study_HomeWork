@@ -29,6 +29,10 @@
 	<insert id="insertBoard" parameterType="BoardVO"> 
 		INSERT INTO BOARD(BOARD_IDX, TITLE, CONTENT, WRITER)
 		VALUES (seq_board.NEXTVAL, #{title}, #{content}, #{writer})
+		<selectKey keyProperty="board_idx" resultType="int" order="AFTER">
+			SELECT
+			SEQ_BOARD.CURRVAL FROM DUAL
+		</selectKey>
 	</insert>
 	
 	<update id="updateBoard" parameterType="BoardVO">

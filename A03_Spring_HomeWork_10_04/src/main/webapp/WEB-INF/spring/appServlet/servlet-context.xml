@@ -40,7 +40,10 @@
 				class="com.monkey.coffee.commonInterCeptor.CommonInterCeptor"></beans:bean>
 		</interceptor>
 	</interceptors>
-	<context:component-scan
-		base-package="com.monkey.coffee" />
-
+	<context:component-scan base-package="com.monkey.coffee" />
+	
+	<!-- 파일업로드에 필요한 bean -->
+	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+		<beans:property value="52428800" name="maxUploadSize" />
+	</beans:bean>
 </beans:beans>

@@ -4,6 +4,7 @@
 const delObjects = $(".delClass");
 
 $(function() {
+	/*
 	$("#create-board-submit").click(function() {
 		const boardFormData = JSON.stringify({
 			title : $("#board-title").val(),
@@ -12,6 +13,12 @@ $(function() {
 		});
 
 		console.log("boardFormData: " + boardFormData);
+		
+		if(boardFormData.title == '' || boardFormData.content == '') {
+			alert("제목과 내용을 적어주세요.");
+			
+			return;
+		}
 		
 		$.ajax({
 			type : "POST",
@@ -25,7 +32,7 @@ $(function() {
 			}
 		});
 	});
-	
+	*/
 	$("#create-comment-submit").click(function() {
 		const commentFormData = JSON.stringify({
 			board_idx : $("#hiddenData")[0].innerText,

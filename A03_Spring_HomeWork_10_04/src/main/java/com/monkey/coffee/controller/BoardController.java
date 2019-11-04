@@ -1,9 +1,13 @@
+//D:\Programming\Spring\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\A03_Spring_HomeWork_10_04\resources\
 package com.monkey.coffee.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,9 +21,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.monkey.coffee.service.BoardService;
 import com.monkey.coffee.service.CommentService;
+import com.monkey.coffee.service.FileService;
+import com.monkey.coffee.util.UploadFileUtils;
+import com.monkey.coffee.vo.BoardFileVO;
 import com.monkey.coffee.vo.BoardVO;
 import com.monkey.coffee.vo.CommentVO;
 import com.monkey.coffee.vo.UserVO;
@@ -37,8 +46,9 @@ public class BoardController {
 	private static final String defaultValue = null;
 
 	private BoardService service;
-	private CommentService cService;
-
+	private CommentService commentService;
+	private FileService fileService;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest request) {
 		logger.info("BoardController /board/index");
@@ -69,6 +79,56 @@ public class BoardController {
 		return "./index";
 	}
 
+	// 파일 업로드 베이스 돌아오기
+	@RequestMapping(value = "/board_file", method = RequestMethod.POST)
+	public String board_filePOST() {
+		return "/floatSection/boardPage/boardCreate";
+	}
+
+	// 파일 업로드
+	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
+	public @ResponseBody List<BoardFileVO> board_file_uploadPOST(Model model, MultipartHttpServletRequest multipartRequest,
+			ServletRequest request) throws IOException, Exception {
+		// 리스트 객체 선언
+		BoardFileVO vo = null;
+		List<BoardFileVO> voList = new ArrayList<BoardFileVO>();
+		// --
+		logger.info("upload");
+		System.out.println("upload");
+
+		Iterator<String> itr = multipartRequest.getFileNames();
+
+		String str = new String();
+
+		while (itr.hasNext()) {
+			MultipartFile mpf = multipartRequest.getFile(itr.next());
+
+			// 객체 구조화
+			vo = new BoardFileVO();
+
+			String originalFilename = mpf.getOriginalFilename();
+			System.out.println("originalFilename : " + originalFilename);
+			String uploadPath = request.getServletContext().getRealPath("/resources");
+			System.out.println("realPath : " + uploadPath);
+
+			// set
+			vo.setFile_name_original(originalFilename);
+			str = UploadFileUtils.uploadFile(uploadPath, originalFilename, mpf.getBytes(), "/image", vo);
+
+			logger.info("break 2");
+			str = str.substring(str.indexOf("image/") - 1);
+
+			vo.setFile_path(str);
+			vo.setFile_size(mpf.getSize());
+
+			// 리스트 추가
+			voList.add(vo);
+		}
+		// logger.info(str);
+		logger.info("result :===>" + voList);
+		return voList;
+	}
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createBoardPage(Model model, HttpServletRequest request) {
 		logger.info("BoardController /board/create");
@@ -80,13 +140,20 @@ public class BoardController {
 
 	@ResponseBody
 	@RequestMapping(value = "/create/db", method = RequestMethod.POST)
-	public String createBoardDB(Model model, @RequestBody BoardVO vo, HttpServletRequest request) {
+	//public String createBoardDB(Model model, @RequestBody Map<String, Object> param, HttpServletRequest request) {
+	public String createBoardDB(Model model, @RequestBody BoardVO boardVO, HttpServletRequest request) {
 		JSONObject jsonObject = new JSONObject();
-
+		
 		logger.info("BoardController /board/create/db");
-
-		logger.info("vo: " + vo);
-		int checkResult = service.insertBoard(vo);
+		
+		// 파일 업로드 vo리스트에관한 로그 찍는 부분
+		if (boardVO.getBoardFileVO() != null) {
+			boardVO.getBoardFileVO().forEach(value -> logger.info("파일VO 값들 : " + value));
+		}
+		
+		logger.info("data: " + boardVO.getBoardFileVO());
+		logger.info("vo: " + boardVO);
+		int checkResult = service.insertBoard(boardVO);
 		// 마지막 시퀀스 값을 반환 --> 마지막 시퀀스 값이기 때문에 마지막 게시물 번호 + 1이다.
 		int seqBoardNum = service.getSeqBoardLastNumberService() - 1;
 
@@ -102,9 +169,10 @@ public class BoardController {
 			jsonObject.put("signal", "fail");
 		}
 
+		
 		return jsonObject.toString();
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/comment/create/db", method = RequestMethod.POST)
 	public String createBoardCommentDB(Model model, @RequestBody CommentVO vo, HttpServletRequest request) {
@@ -112,14 +180,13 @@ public class BoardController {
 
 		logger.info("BoardController /board/create/db");
 		
-		logger.info("vo: " + vo);
-		int checkResult = cService.insertCommentService(vo);
+		int checkResult = commentService.insertCommentService(vo);
 		// 마지막 시퀀스 값을 반환 --> 마지막 시퀀스 값이기 때문에 마지막 게시물 번호 + 1이다.
 
 		logger.info("checkResult: " + checkResult);
-		
+
 		jsonObject.put("seqNum", vo.getBoard_idx());
-		
+
 		// 성공 했을시 checkResult는 양수를 반환
 		// 실패 했을시 checkResult는 음수를 반환
 		if (checkResult > 0) {
@@ -141,8 +208,9 @@ public class BoardController {
 
 		Map<Integer, ArrayList<String>> board_cnt = (Map<Integer, ArrayList<String>>) session.getAttribute("board_cnt");
 		BoardVO getObject = service.getBoard(idx);
-		
-		List<CommentVO> getCommentObject = cService.getCommentService(idx);
+
+		List<CommentVO> getCommentObject = commentService.getCommentService(idx);
+		List<BoardFileVO> getFileObject = fileService.getFilesService(idx);
 		
 		ArrayList<String> boardUserSawList = board_cnt.get(idx);
 		if (userData != null) {
@@ -159,19 +227,27 @@ public class BoardController {
 				service.updateBoardHistoryService(idx);
 			}
 		}
-
+		
 		// 게시물의 주인인지 확인 하는 단계
 		if (this.searchMasterPost(request, idx)) {
 			model.addAttribute("haveUserBoard", "true");
 		} else {
 			model.addAttribute("haveUserBoard", "false");
 		}
-		
-		if(getCommentObject == null) {
+
+		if (getCommentObject == null) {
 			model.addAttribute("comments", null);
 		} else {
 			model.addAttribute("comments", getCommentObject);
 		}
+		
+		if(getFileObject == null) {
+			model.addAttribute("files", null);
+		} else {
+			model.addAttribute("files", getFileObject);
+			logger.info("getFileObject Data: " + getFileObject);
+		}
+		
 		
 		model.addAttribute("page", "board_view");
 		model.addAttribute("boardContent", getObject);
@@ -227,20 +303,20 @@ public class BoardController {
 
 		return jsonObject.toString();
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/commnet/modify/db", method = RequestMethod.POST)
 	public String modifyCommnetDB(Model model, HttpServletRequest request, @RequestBody CommentVO vo) {
 		JSONObject jsonObject = new JSONObject();
 		logger.info("BoardController /board/comment/modify/db");
 		logger.info("board test: " + vo);
-		
-		if(cService.updateCommentService(vo) > 0) {
+
+		if (commentService.updateCommentService(vo) > 0) {
 			jsonObject.put("signal", "success");
 		} else {
 			jsonObject.put("signal", "fail");
 		}
-		
+
 		jsonObject.put("seqNum", vo.getBoard_idx());
 
 		return jsonObject.toString();
@@ -312,25 +388,25 @@ public class BoardController {
 
 		return jsonObject.toString();
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/comment/delete/db", method = RequestMethod.POST)
 	public String deleteCommentDB(Model model, HttpServletRequest request, @RequestBody CommentVO vo) {
 		JSONObject jsonObject = new JSONObject();
 		logger.info("BoardController /board/comment/modify/db");
 		logger.info("board test: " + vo);
-		
-		if(cService.deleteCommentService(vo.getComment_idx()) > 0) {
+
+		if (commentService.deleteCommentService(vo.getComment_idx()) > 0) {
 			jsonObject.put("signal", "success");
 		} else {
 			jsonObject.put("signal", "fail");
 		}
-		
+
 		jsonObject.put("seqNum", vo.getBoard_idx());
 
 		return jsonObject.toString();
 	}
-	
+
 	@RequestMapping(value = "/session/delete/board_cnt", method = RequestMethod.GET)
 	public String deleteSessionBoardCnt(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
