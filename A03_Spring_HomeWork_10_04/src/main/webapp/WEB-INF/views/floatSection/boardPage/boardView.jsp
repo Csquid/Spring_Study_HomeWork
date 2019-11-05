@@ -30,7 +30,7 @@
 				<textarea class="col-12" disabled id=""
 					style="height: 500px; resize: none; border: solid #C1C1C1 1px; padding: 15px; background-color: white;">${boardContent.content}</textarea>
 				<div style="margin-top: 10px;"></div>
-				<c:if test="${files.size() != 0}">
+				<c:if test="${files != null}">
 					<div class="col-12 row"
 						style="margin-bottom: 10px; margin-left: 0px; margin-right: 0px; height: auto; border: solid #C1C1C1 1px; padding-top: 10px; background-color: white;">
 
@@ -43,7 +43,7 @@
 				</c:if>
 
 				<!-- 유저 댓글들 -->
-				<c:if test="${comments.size() != 0}">
+				<c:if test="${comments != null}">
 					<c:forEach var="i" begin="0" end="${comments.size() -1}">
 						<div class="row"
 							style="margin-right: 0px; margin-left: 0px; margin-bottom: 10px;">

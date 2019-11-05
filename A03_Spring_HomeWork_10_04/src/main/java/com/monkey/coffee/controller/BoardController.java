@@ -235,13 +235,13 @@ public class BoardController {
 			model.addAttribute("haveUserBoard", "false");
 		}
 
-		if (getCommentObject == null) {
+		if (getCommentObject.size() == 0) {
 			model.addAttribute("comments", null);
 		} else {
 			model.addAttribute("comments", getCommentObject);
 		}
 		
-		if(getFileObject == null) {
+		if(getFileObject.size() == 0) {
 			model.addAttribute("files", null);
 		} else {
 			model.addAttribute("files", getFileObject);
@@ -261,7 +261,9 @@ public class BoardController {
 		logger.info("BoardController /board/modify");
 
 		BoardVO getObject = service.getBoard(idx);
-		logger.info("getData: " + getObject);
+		List<BoardFileVO> getFileObject = fileService.getFilesService(idx);
+		
+		logger.info("getData: " + getFileObject);
 
 		if (getObject == null) {
 			jsonObject.put("signal", "fail");
@@ -271,7 +273,13 @@ public class BoardController {
 
 		model.addAttribute("page", "board_modify");
 		model.addAttribute("boardContent", getObject);
-
+		
+		if(getFileObject.size() == 0) {
+			model.addAttribute("boardFiles", null);
+		} else {
+			model.addAttribute("boardFiles", getFileObject);
+		}
+		
 		return "./index";
 	}
 

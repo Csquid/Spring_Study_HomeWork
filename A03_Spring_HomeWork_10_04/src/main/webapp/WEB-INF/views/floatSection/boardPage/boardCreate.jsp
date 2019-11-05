@@ -71,12 +71,22 @@
             },
             init: function () {
                 const thisDropzone = this;
-                const mockFile = { name: 'Name Image', size: 12345, type: 'image/jpeg', thumbnailWidth: 120, thumbnailHeight: 120};
+                const mockFile1 = { name: 'Name Image', size: 12345, type: 'image/jpeg' };
+                const mockFile2 = { name: 'Name Image', size: 12345, type: 'image/jpeg' };
                	
-                thisDropzone.emit("success", mockFile);
-                thisDropzone.emit("addedfile", mockFile);
-                thisDropzone.emit("thumbnail", mockFile, "http://localhost:8080/resources//image/2019/11/04/fd9ece29-adfe-4bf9-9b53-690127a57d29_KakaoTalk_20191102_152024757.jpg");
-                thisDropzone.emit("complete", mockFile);
+                $.each()
+                thisDropzone.emit("success", mockFile1);
+                thisDropzone.emit("addedfile", mockFile1);
+                thisDropzone.emit("thumbnail", mockFile1, "http://localhost:8080/resources//image/2019/11/04/fd9ece29-adfe-4bf9-9b53-690127a57d29_KakaoTalk_20191102_152024757.jpg");
+                thisDropzone.emit("complete", mockFile1);
+                
+                thisDropzone.emit("success", mockFile2);
+                thisDropzone.emit("addedfile", mockFile2);
+                thisDropzone.emit("thumbnail", mockFile2, "http://localhost:8080/resources//image/2019/11/04/ced2702b-2713-45f0-9247-734b7b6c5cef_bono_icon.jpg");
+                thisDropzone.emit("complete", mockFile2);
+                
+                $('.dz-image').find('img').css({"width": "120px", "height": "120px"});
+                //$('.dz-image').find('img').css("zoom", "0.2");
             }
         });
 		
@@ -134,7 +144,6 @@
 				$("#submit").trigger("click"); */
 			}
 		}).done(function() {
-			
 			/*
 			if(($('#title').val() == '') || ($('#content').val() == '')){
 				alert("제목 또는 내용을 입력해주세요 ~~");
