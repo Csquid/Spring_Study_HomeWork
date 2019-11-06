@@ -48,6 +48,33 @@
 Dropzone.autoDiscover = false;
 var formData = new FormData();
 var file_name;
+//const nData = ${boardFiles[0].file_idx};
+//const nArr = ${boardFiles.size()};
+let nArr = new Array();
+//file_idx=14, board_idx=60, file_name_original=20130709164445_6722.png, 
+//file_name_stored=046757da-e8e5-449d-a4a5-a252ae82bf64_20130709164445_6722.png, 
+//file_path=/image/2019/11/04/046757da-e8e5-449d-a4a5-a252ae82bf64_20130709164445_6722.png, 
+//file_size=499947, creation_date=2019-11-04 20:43:28
+
+const templateObject = {
+		file_idx: 0,
+		board_idx: 0,
+		file_name_original: "",
+		file_name_stored: "",
+		file_path: "",
+		file_size: 0,
+		creation_date: ""
+};
+
+console.log('${boardFiles[0]}');
+/*
+for(let i = 0; i < ${boardFiles.size()}; i++) {
+	nArr.push(${boardFiles[i]});
+	console.log(${boardFiles[i]});
+}
+*/
+
+console.log("board_File idx: ", nArr);
 
 $(document).ready(function () {
 	
@@ -73,10 +100,14 @@ $(document).ready(function () {
         },
         init: function () {
             const thisDropzone = this;
-            const mockFile1 = { name: 'Name Image', size: 12345, type: 'image/jpeg' };
-            const mockFile2 = { name: 'Name Image', size: 12345, type: 'image/jpeg' };
+            const mockFile1 = { name: 'Name Image1', size: 12345, type: 'image/jpeg', url: "http://localhost:8080/resources//image/2019/11/04/fd9ece29-adfe-4bf9-9b53-690127a57d29_KakaoTalk_20191102_152024757.jpg" };
+            const mockFile2 = { name: 'Name Image2', size: 12345, type: 'image/jpeg', url: "http://localhost:8080/resources//image/2019/11/04/ced2702b-2713-45f0-9247-734b7b6c5cef_bono_icon.jpg" };
+           	const nObject = {
+           			mock1: { name: 'Name Image1', size: 12345, type: 'image/jpeg', url: "http://localhost:8080/resources//image/2019/11/04/fd9ece29-adfe-4bf9-9b53-690127a57d29_KakaoTalk_20191102_152024757.jpg" },
+           			mock2: mockFile2
+           	};
            	
-            $.each()
+            /*
             thisDropzone.emit("success", mockFile1);
             thisDropzone.emit("addedfile", mockFile1);
             thisDropzone.emit("thumbnail", mockFile1, "http://localhost:8080/resources//image/2019/11/04/fd9ece29-adfe-4bf9-9b53-690127a57d29_KakaoTalk_20191102_152024757.jpg");
@@ -86,9 +117,42 @@ $(document).ready(function () {
             thisDropzone.emit("addedfile", mockFile2);
             thisDropzone.emit("thumbnail", mockFile2, "http://localhost:8080/resources//image/2019/11/04/ced2702b-2713-45f0-9247-734b7b6c5cef_bono_icon.jpg");
             thisDropzone.emit("complete", mockFile2);
+            */
             
-            $('.dz-image').find('img').css({"width": "120px", "height": "120px"});
             //$('.dz-image').find('img').css("zoom", "0.2");
+            
+            let i = 0;
+            $.each(nObject, function(index, item) {
+            	thisDropzone.emit("success", mockFile1);
+                thisDropzone.emit("addedfile", mockFile1);
+                thisDropzone.emit("thumbnail", mockFile1, mockFile1.url);
+                thisDropzone.emit("complete", mockFile1);
+                //$('.dz-image').find('img')[i].attr('id', item.name);
+                i++;
+				console.log(item);
+			})
+			
+			$('.dz-image').find('img').css({"width": "120px", "height": "120px"});
+            
+            /*
+            	Question: How can I convert a DOM element to a jQuery element?
+            			
+            	var elm = document.createElement("div");
+				var jelm = $(elm);//convert to jQuery Element
+				var htmlElm = jelm[0];//convert to HTML Element
+            */
+            
+            
+			//$($('.dz-preview')[0]).attr('id', 'attribute_id_test_0');
+			$.each($('.dz-preview'), function(index, items) {
+				console.log(items);
+			});
+			
+			/*
+			$.each($('.dz-image').find('img'), function(index, nItem02) {
+				console.log(index + ", " + nItem02);
+			});
+			*/
         }
     });
 	

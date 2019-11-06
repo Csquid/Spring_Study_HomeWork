@@ -73,8 +73,7 @@
                 const thisDropzone = this;
                 const mockFile1 = { name: 'Name Image', size: 12345, type: 'image/jpeg' };
                 const mockFile2 = { name: 'Name Image', size: 12345, type: 'image/jpeg' };
-               	
-                $.each()
+                
                 thisDropzone.emit("success", mockFile1);
                 thisDropzone.emit("addedfile", mockFile1);
                 thisDropzone.emit("thumbnail", mockFile1, "http://localhost:8080/resources//image/2019/11/04/fd9ece29-adfe-4bf9-9b53-690127a57d29_KakaoTalk_20191102_152024757.jpg");

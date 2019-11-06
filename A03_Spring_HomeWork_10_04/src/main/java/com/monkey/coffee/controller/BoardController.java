@@ -95,7 +95,10 @@ public class BoardController {
 		// --
 		logger.info("upload");
 		System.out.println("upload");
-
+		
+		if(multipartRequest != null) {
+			
+		}
 		Iterator<String> itr = multipartRequest.getFileNames();
 
 		String str = new String();
