@@ -12,7 +12,7 @@
 	</select>
 	<select id="getComment" resultType="CommentVO">
 		SELECT * FROM BOARD_COMMENT 
-		WHERE BOARD_IDX = #{board_idx};
+		WHERE BOARD_IDX = #{board_idx}
 	</select>
 	<select id="searchIDXs" resultType="int">
 		select BOARD_IDX from board where

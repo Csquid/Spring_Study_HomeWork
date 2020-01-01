@@ -11,10 +11,8 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="hikariConfig_fdc" class="com.zaxxer.hikari.HikariConfig">
-		<property name="driverClassName"
-			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="jdbcUrl"
-			value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl"></property>
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl"></property>
 		<property name="username" value="lake0019"></property>
 		<property name="password" value="1234"></property>
 
@@ -28,8 +26,7 @@
 	<bean id="sqlSessionFactory_fdc"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource_fdc" />
-		<property name="configLocation"
-			value="classpath:mybatis/mybatis-config.xml" />
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
 		<!-- <property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property> -->
 
 	</bean>

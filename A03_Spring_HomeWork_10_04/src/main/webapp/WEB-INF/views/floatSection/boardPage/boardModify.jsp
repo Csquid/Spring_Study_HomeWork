@@ -136,10 +136,16 @@ $(document).ready(function () {
             
             /*
             	Question: How can I convert a DOM element to a jQuery element?
-            			
+            	Q : I am creating an element with document.createElement(). Now how can I pass it to a function that only takes a Jquery object?
+            	   --> $("#id")
+            	   
+            	Answer:
             	var elm = document.createElement("div");
 				var jelm = $(elm);//convert to jQuery Element
 				var htmlElm = jelm[0];//convert to HTML Element
+				
+				https://www.codingfactory.net/10312 .each()
+				https://webclub.tistory.com/455 $.each()
             */
             
             

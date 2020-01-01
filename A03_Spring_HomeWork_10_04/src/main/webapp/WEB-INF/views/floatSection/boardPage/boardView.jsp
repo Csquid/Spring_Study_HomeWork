@@ -38,6 +38,7 @@
 							<img class="col-2 monkey-file"
 								src="/resources/${files[i].file_path}" width="100%"
 								height="250px">
+								<!-- /resources//image/2019/11/04/fd9ece29-adfe-4bf9-9b53-690127a57d29_KakaoTalk_20191102_152024757.jpg -->
 						</c:forEach>
 					</div>
 				</c:if>

@@ -24,9 +24,7 @@
 				aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div
-				class="collapse navbar-collapse justify-content-start ml-md-auto "
-				id="navbarNavAltMarkup">
+			<div class="collapse navbar-collapse justify-content-start ml-md-auto " id="navbarNavAltMarkup">
 				<div class="navbar-nav">
 					<a class="nav-item nav-link" id="sub1_Tab" href="/sub1_Tab">Sub1</a>
 					<a class="nav-item nav-link" id="sub2_Tab" href="/sub2_Tab">Sub2</a>

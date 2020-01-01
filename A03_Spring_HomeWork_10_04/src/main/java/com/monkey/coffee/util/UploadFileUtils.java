@@ -21,26 +21,20 @@ public class UploadFileUtils {
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData, String folderName, BoardFileVO fVo) throws Exception {
 		System.out.println("uploadFile");
 		// UUID 발급
-		System.out.println("Break before");
 		UUID uuid = UUID.randomUUID();
-		System.out.println("Break after");
 		// 저장할 파일명 = UUID + 원본이름
 		String savedName = uuid.toString() + "_" + originalName;
 		fVo.setFile_name_stored(savedName);
-		System.out.println("Break after 0");
 //		System.out.println("savedName : "+savedName);
 //		System.out.println("uploadPath : "+uploadPath);
 		// 업로드할 디렉토리(날짜별 폴더) 생성 
 		String savedPath = calcPath(uploadPath, folderName);
-		System.out.println("Break after 1");
 		// 파일 경로(기존의 업로드경로+날짜별경로), 파일명을 받아 파일 객체 생성
 		File target = new File(uploadPath + savedPath, savedName);
 //		System.out.println("savedPath : "+savedPath);
-		System.out.println("Break after 2");
 		// 임시 디렉토리에 업로드된 파일을 지정된 디렉토리로 복사
 		FileCopyUtils.copy(fileData, target);
 //		System.out.println("fileData, target : "+fileData+", "+target);
-		System.out.println("Break after 3");
 		System.out.println("path??" + uploadPath + savedPath + File.separator + savedName);
 		
 		//이미지 파일은 썸네일 사용
@@ -67,9 +61,7 @@ public class UploadFileUtils {
 		String datePath = monthPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.DATE));
 //		System.out.println(datePath);
         // 디렉토리 생성 메서드 호출
-		System.out.println("Break After 0-1");
 		makeDir(uploadPath, ImgUpload, yearPath, monthPath, datePath);
-		System.out.println("Break After 0-2");
 		return datePath;
 	}
 	

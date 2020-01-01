@@ -14,14 +14,12 @@
 	</select>
 
 	<select id="searchUserName" resultType="UserVO">
-		SELECT * FROM MEMBER
-		WHERE
+		SELECT * FROM MEMBER WHERE
 		name = #{name}
 	</select>
 
 	<select id="searchUser" resultType="UserVO">
-		SELECT * FROM
-		MEMBER WHERE
+		SELECT * FROM MEMBER WHERE
 		LOWER(${searchType}) = #{keyword}
 	</select>
 	
